@@ -5,7 +5,12 @@
 // ========================================
 
 const LESSON_TYPES = {
-    VOCABULARY: 'vocabulary',
+    VOCABULARY: 'vocabulary',           // Basic nature & elements (Q'umarkaj)
+    VOCABULARY_ANIMALS: 'vocabulary_animals',     // Animals & nature (Panajachel)
+    VOCABULARY_WARFARE: 'vocabulary_warfare',     // War & conflict (Huehuetenango)
+    VOCABULARY_PLACES: 'vocabulary_places',       // Places & geography (Zaculeu)
+    VOCABULARY_SPIRITUAL: 'vocabulary_spiritual', // Spiritual & sacred (Cobán)
+    VOCABULARY_ADVANCED: 'vocabulary_advanced',   // Advanced concepts (Iximche)
     PRONOUNS: 'pronouns', 
     GREETINGS: 'greetings',
     POSSESSION: 'possession',
@@ -463,6 +468,541 @@ const CULTURAL_VOCABULARY = {
             spanish: "chile",
             icon: "🌶️",
             culture: "Ik adds heat to every meal. Kaq ik' (red chile) is essential in K'iche' cooking.",
+            difficulty: 'hero',
+        },
+    ],
+};
+
+// ========================================
+// LOCATION-SPECIFIC VOCABULARY SETS
+// Each location teaches different thematic words
+// ========================================
+
+// PANAJACHEL - Animals & Lake Atitlán nature
+const VOCABULARY_ANIMALS = {
+    core: [
+        {
+            kiche: "tz'i'",
+            english: "dog",
+            spanish: "perro",
+            icon: "🐕",
+            culture: "Tz'i' is also a day sign. Dogs guided souls to Xib'alb'a in Maya belief.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "mis",
+            english: "cat",
+            spanish: "gato",
+            icon: "🐈",
+            culture: "Cats arrived with the Spanish. The K'iche' word comes from Spanish 'miso'.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "kar",
+            english: "fish",
+            spanish: "pescado",
+            icon: "🐟",
+            culture: "Lake Atitlán is famous for its fish. Kar is essential vocabulary here.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "tz'ikin",
+            english: "bird",
+            spanish: "pájaro",
+            icon: "🐦",
+            culture: "Tz'ikin is a day sign meaning 'bird' - associated with luck and fortune.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "kumatz",
+            english: "snake",
+            spanish: "serpiente",
+            icon: "🐍",
+            culture: "Kukulkan/Q'uq'umatz, the feathered serpent, is a central Maya deity.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "kej",
+            english: "deer",
+            spanish: "venado",
+            icon: "🦌",
+            culture: "Kej is both a day sign and means 'deer'. After the conquest, it also means 'horse'.",
+            difficulty: 'soldier',
+        },
+    ],
+    warrior: [
+        {
+            kiche: "b'alam",
+            english: "jaguar",
+            spanish: "jaguar",
+            icon: "🐆",
+            culture: "B'alam Kitze', B'alam Aq'ab' - the first K'iche' ancestors had jaguar names.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "k'uk'",
+            english: "quetzal",
+            spanish: "quetzal",
+            icon: "🦜",
+            culture: "The sacred quetzal's feathers adorned K'iche' royalty. Tecun Uman wore a quetzal headdress.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "imul",
+            english: "rabbit",
+            spanish: "conejo",
+            icon: "🐇",
+            culture: "In Maya stories, a rabbit helped the Hero Twins trick the Lords of Xib'alb'a.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "xik'",
+            english: "wing/fly",
+            spanish: "ala/volar",
+            icon: "🪽",
+            culture: "Used for flying creatures. The quetzal's wings (uxik' k'uk') were most precious.",
+            difficulty: 'warrior',
+        },
+    ],
+    hero: [
+        {
+            kiche: "koj",
+            english: "puma/lion",
+            spanish: "puma/león",
+            icon: "🦁",
+            culture: "Mountain lions still roam the Guatemalan highlands.",
+            difficulty: 'hero',
+        },
+        {
+            kiche: "sotz'",
+            english: "bat",
+            spanish: "murciélago",
+            icon: "🦇",
+            culture: "Sotz' is a day sign. Camazotz, the bat god, ruled in Xib'alb'a.",
+            difficulty: 'hero',
+        },
+    ],
+};
+
+// HUEHUETENANGO - War & conflict vocabulary
+const VOCABULARY_WARFARE = {
+    core: [
+        {
+            kiche: "ch'akoj",
+            english: "battle",
+            spanish: "batalla",
+            icon: "⚔️",
+            culture: "The K'iche' were fierce warriors who defended their lands for centuries.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "ch'eken",
+            english: "war",
+            spanish: "guerra",
+            icon: "🛡️",
+            culture: "Ch'eken ya'oj means 'to make war'. The K'iche' resisted Spanish conquest bravely.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "achi'il",
+            english: "warrior",
+            spanish: "guerrero",
+            icon: "🏹",
+            culture: "Achi'il comes from 'achi' (man). Warriors were essential to K'iche' society.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "tz'alam",
+            english: "shield",
+            spanish: "escudo",
+            icon: "🛡️",
+            culture: "K'iche' warriors used round shields made of wood and leather.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "k'uxb'al",
+            english: "arrow",
+            spanish: "flecha",
+            icon: "🏹",
+            culture: "Before metal weapons, arrows were the K'iche's most powerful weapon.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "chak'ab'",
+            english: "axe",
+            spanish: "hacha",
+            icon: "🪓",
+            culture: "Obsidian axes were both tools and weapons for the ancient Maya.",
+            difficulty: 'soldier',
+        },
+    ],
+    warrior: [
+        {
+            kiche: "ch'akanik",
+            english: "victory",
+            spanish: "victoria",
+            icon: "🏆",
+            culture: "Ch'akanik brought glory to the warrior's lineage.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "sachoj",
+            english: "defeat",
+            spanish: "derrota",
+            icon: "💔",
+            culture: "Sachoj also means 'to be lost'. Defeat meant losing one's way.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "kolob'al",
+            english: "to defend",
+            spanish: "defender",
+            icon: "🏰",
+            culture: "Kolob'al - to protect one's people and land.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "kamisaj",
+            english: "to kill",
+            spanish: "matar",
+            icon: "💀",
+            culture: "In war, warriors had to be prepared for this harsh reality.",
+            difficulty: 'warrior',
+        },
+    ],
+    hero: [
+        {
+            kiche: "q'at tzij",
+            english: "victory speech",
+            spanish: "discurso de victoria",
+            icon: "🎺",
+            culture: "Warriors gave formal speeches after battle victories.",
+            difficulty: 'hero',
+        },
+        {
+            kiche: "jun'ik",
+            english: "to unite",
+            spanish: "unirse",
+            icon: "🤝",
+            culture: "Tecun Uman tried to unite all Maya peoples against the Spanish.",
+            difficulty: 'hero',
+        },
+    ],
+};
+
+// ZACULEU - Places & geography
+const VOCABULARY_PLACES = {
+    core: [
+        {
+            kiche: "juyub'",
+            english: "mountain",
+            spanish: "montaña",
+            icon: "🏔️",
+            culture: "Mountains are living beings in Maya thought. Many are sacred sites.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "siwan",
+            english: "ravine/canyon",
+            spanish: "barranco",
+            icon: "🏞️",
+            culture: "The highlands are full of deep ravines carved by ancient rivers.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "b'e",
+            english: "road/path",
+            spanish: "camino",
+            icon: "🛤️",
+            culture: "The Maya built extensive road networks connecting their cities.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "tinamit",
+            english: "city/town",
+            spanish: "ciudad/pueblo",
+            icon: "🏘️",
+            culture: "Tinamit refers to a fortified city. Q'umarkaj was the greatest tinamit.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "jul",
+            english: "cave",
+            spanish: "cueva",
+            icon: "🕳️",
+            culture: "Caves were entrances to Xib'alb'a. Many are still sacred sites.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "cho",
+            english: "lake",
+            spanish: "lago",
+            icon: "🏞️",
+            culture: "Lake Atitlán is called 'the navel of the world' by the Maya.",
+            difficulty: 'soldier',
+        },
+    ],
+    warrior: [
+        {
+            kiche: "ya'",
+            english: "river",
+            spanish: "río",
+            icon: "🌊",
+            culture: "Rivers were highways of the ancient Maya world.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "k'isis",
+            english: "forest",
+            spanish: "bosque",
+            icon: "🌲",
+            culture: "The cloud forests of the highlands shelter the sacred quetzal.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "tulan",
+            english: "legendary city",
+            spanish: "ciudad legendaria",
+            icon: "🏛️",
+            culture: "Tulan was the mythical place where K'iche' ancestors received fire.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "k'ichela'",
+            english: "K'iche' land",
+            spanish: "tierra K'iche'",
+            icon: "🗺️",
+            culture: "The ancestral homeland of the K'iche' people in the highlands.",
+            difficulty: 'warrior',
+        },
+    ],
+    hero: [
+        {
+            kiche: "pek",
+            english: "cave shrine",
+            spanish: "cueva sagrada",
+            icon: "⛩️",
+            culture: "Special caves used for ceremonies and offerings.",
+            difficulty: 'hero',
+        },
+        {
+            kiche: "jolomaj",
+            english: "skull shrine",
+            spanish: "altar de cráneos",
+            icon: "💀",
+            culture: "Sacred places where ancestral remains were honored.",
+            difficulty: 'hero',
+        },
+    ],
+};
+
+// COBÁN - Spiritual & sacred vocabulary
+const VOCABULARY_SPIRITUAL = {
+    core: [
+        {
+            kiche: "K'ab'awil",
+            english: "god/deity",
+            spanish: "dios/deidad",
+            icon: "✨",
+            culture: "K'ab'awil refers to divine beings. Tohil was the K'iche' patron deity.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "ajq'ij",
+            english: "daykeeper/priest",
+            spanish: "sacerdote maya",
+            icon: "🧙",
+            culture: "Ajq'ij are keepers of the sacred calendar and perform ceremonies.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "nawal",
+            english: "spirit/nagual",
+            spanish: "espíritu/nagual",
+            icon: "👻",
+            culture: "Every person has a nawal - an animal spirit companion.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "cholq'ij",
+            english: "sacred calendar",
+            spanish: "calendario sagrado",
+            icon: "📅",
+            culture: "The 260-day sacred calendar guides ceremonies and life decisions.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "loq'olaj",
+            english: "sacred/holy",
+            spanish: "sagrado/santo",
+            icon: "🙏",
+            culture: "Loq'olaj describes anything connected to the divine.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "pixab'",
+            english: "counsel/commandment",
+            spanish: "consejo/mandamiento",
+            icon: "📜",
+            culture: "The pixab' are the teachings passed down from ancestors.",
+            difficulty: 'soldier',
+        },
+    ],
+    warrior: [
+        {
+            kiche: "Xib'alb'a",
+            english: "underworld",
+            spanish: "inframundo",
+            icon: "🌑",
+            culture: "Xib'alb'a means 'Place of Fear'. The Hero Twins defeated its lords.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "Pop Wuj",
+            english: "Popol Vuh",
+            spanish: "Popol Vuh",
+            icon: "📖",
+            culture: "The sacred book of the K'iche', telling of creation and heroes.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "uk'u'x",
+            english: "heart/essence",
+            spanish: "corazón/esencia",
+            icon: "❤️",
+            culture: "Uk'u'x Kaj, Uk'u'x Ulew - Heart of Sky, Heart of Earth - the creator.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "ch'umilal",
+            english: "destiny/star",
+            spanish: "destino/estrella",
+            icon: "⭐",
+            culture: "Each person's destiny is written in the stars and calendar.",
+            difficulty: 'warrior',
+        },
+    ],
+    hero: [
+        {
+            kiche: "tz'aqat",
+            english: "complete/sacred",
+            spanish: "completo/sagrado",
+            icon: "🔮",
+            culture: "To be tz'aqat is to be spiritually complete.",
+            difficulty: 'hero',
+        },
+        {
+            kiche: "ojer tzij",
+            english: "ancient words",
+            spanish: "palabras antiguas",
+            icon: "📿",
+            culture: "The sacred oral traditions passed down for millennia.",
+            difficulty: 'hero',
+        },
+    ],
+};
+
+// IXIMCHE - Advanced concepts & history
+const VOCABULARY_ADVANCED = {
+    core: [
+        {
+            kiche: "amaq'",
+            english: "nation/people",
+            spanish: "nación/pueblo",
+            icon: "🏛️",
+            culture: "The K'iche' amaq' was one of the most powerful in Mesoamerica.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "ajpop",
+            english: "king/ruler",
+            spanish: "rey/gobernante",
+            icon: "👑",
+            culture: "The Ajpop was the supreme ruler of the K'iche' nation.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "k'amal b'e",
+            english: "guide/leader",
+            spanish: "guía/líder",
+            icon: "🧭",
+            culture: "K'amal b'e literally means 'one who shows the road'.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "k'aslemal",
+            english: "life",
+            spanish: "vida",
+            icon: "🌱",
+            culture: "K'aslemal encompasses all of existence, not just biological life.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "kaminaq",
+            english: "death/the dead",
+            spanish: "muerte/los muertos",
+            icon: "💀",
+            culture: "Death is not an end but a transition to another realm.",
+            difficulty: 'soldier',
+        },
+        {
+            kiche: "no'jib'al",
+            english: "wisdom",
+            spanish: "sabiduría",
+            icon: "🦉",
+            culture: "No'jib'al comes from no'j (thought) - deep, earned wisdom.",
+            difficulty: 'soldier',
+        },
+    ],
+    warrior: [
+        {
+            kiche: "qati't qamam",
+            english: "our ancestors",
+            spanish: "nuestros abuelos",
+            icon: "👴",
+            culture: "Literally 'our grandmothers our grandfathers' - all who came before.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "saqil k'aslemal",
+            english: "life in peace",
+            spanish: "vida en paz",
+            icon: "🕊️",
+            culture: "The ultimate goal - living in harmony and peace.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "k'axk'olil",
+            english: "suffering",
+            spanish: "sufrimiento",
+            icon: "😢",
+            culture: "The conquest brought immense k'axk'olil to the K'iche' people.",
+            difficulty: 'warrior',
+        },
+        {
+            kiche: "q'ij saq",
+            english: "holy day/holiday",
+            spanish: "día sagrado",
+            icon: "🎉",
+            culture: "Important days in the sacred calendar for ceremonies.",
+            difficulty: 'warrior',
+        },
+    ],
+    hero: [
+        {
+            kiche: "Iximulew",
+            english: "Guatemala (Land of Corn)",
+            spanish: "Guatemala (Tierra del Maíz)",
+            icon: "🌽",
+            culture: "The K'iche' name for Guatemala means 'Land of Corn'.",
+            difficulty: 'hero',
+        },
+        {
+            kiche: "ronojel",
+            english: "everything/all",
+            spanish: "todo",
+            icon: "🌍",
+            culture: "Ronojel encompasses the totality of existence.",
             difficulty: 'hero',
         },
     ],
@@ -993,6 +1533,21 @@ function generateLessonQuestions(lessonId, count = 5, learnedWords = []) {
         case 'vocabulary':
             contentSource = CULTURAL_VOCABULARY;
             break;
+        case 'vocabulary_animals':
+            contentSource = VOCABULARY_ANIMALS;
+            break;
+        case 'vocabulary_warfare':
+            contentSource = VOCABULARY_WARFARE;
+            break;
+        case 'vocabulary_places':
+            contentSource = VOCABULARY_PLACES;
+            break;
+        case 'vocabulary_spiritual':
+            contentSource = VOCABULARY_SPIRITUAL;
+            break;
+        case 'vocabulary_advanced':
+            contentSource = VOCABULARY_ADVANCED;
+            break;
         case 'greetings':
             contentSource = GREETINGS_CONTENT;
             break;
@@ -1301,10 +1856,50 @@ const LESSONS = {
     vocabulary: {
         id: 'vocabulary',
         name: "K'ak'a taq tzij",
-        englishName: 'Vocabulary',
-        spanishName: 'Vocabulario',
-        description: 'Learn words with cultural context from the Popol Vuh',
+        englishName: 'Basic Vocabulary',
+        spanishName: 'Vocabulario Básico',
+        description: 'Learn essential words: elements, nature, and sacred concepts',
         icon: '📚',
+    },
+    vocabulary_animals: {
+        id: 'vocabulary_animals',
+        name: "Taq awaj",
+        englishName: 'Animals & Nature',
+        spanishName: 'Animales y Naturaleza',
+        description: 'Learn the animals of Lake Atitlán and the highlands',
+        icon: '🦜',
+    },
+    vocabulary_warfare: {
+        id: 'vocabulary_warfare',
+        name: "Ch'akoj tzij",
+        englishName: 'War & Resistance',
+        spanishName: 'Guerra y Resistencia',
+        description: 'Learn the vocabulary of battle and defense',
+        icon: '⚔️',
+    },
+    vocabulary_places: {
+        id: 'vocabulary_places',
+        name: "K'olib'al",
+        englishName: 'Places & Geography',
+        spanishName: 'Lugares y Geografía',
+        description: 'Learn words for mountains, rivers, and sacred places',
+        icon: '🏔️',
+    },
+    vocabulary_spiritual: {
+        id: 'vocabulary_spiritual',
+        name: "Loq'olaj tzij",
+        englishName: 'Sacred & Spiritual',
+        spanishName: 'Sagrado y Espiritual',
+        description: 'Learn spiritual concepts and sacred vocabulary',
+        icon: '✨',
+    },
+    vocabulary_advanced: {
+        id: 'vocabulary_advanced',
+        name: "Nim taq tzij",
+        englishName: 'Advanced Concepts',
+        spanishName: 'Conceptos Avanzados',
+        description: 'Master complex words about history, philosophy, and culture',
+        icon: '🏛️',
     },
     greetings: {
         id: 'greetings',
@@ -1397,3 +1992,11 @@ window.setDifficulty = setDifficulty;
 window.getDifficulty = getDifficulty;
 window.generateLessonQuestions = generateLessonQuestions;
 window.checkLessonAnswer = checkLessonAnswer;
+
+// Export location-specific vocabulary for tutorials
+window.CULTURAL_VOCABULARY = CULTURAL_VOCABULARY;
+window.VOCABULARY_ANIMALS = VOCABULARY_ANIMALS;
+window.VOCABULARY_WARFARE = VOCABULARY_WARFARE;
+window.VOCABULARY_PLACES = VOCABULARY_PLACES;
+window.VOCABULARY_SPIRITUAL = VOCABULARY_SPIRITUAL;
+window.VOCABULARY_ADVANCED = VOCABULARY_ADVANCED;
