@@ -1364,16 +1364,49 @@ const POSSESSION_CONTENT = {
 
 const NEGATION_CONTENT = {
     core: [
-        { kiche: "na...taj", english: "not (verb negation)", spanish: "no (negación)", icon: "🚫", culture: "Na VERB taj - two-part negation surrounds the verb.", difficulty: 'soldier', example: "Na kinwar taj = I don't sleep" },
-        { kiche: "mani", english: "no/nothing", spanish: "no/nada", icon: "❌", culture: "Used alone as 'no' or 'there isn't'.", difficulty: 'soldier', example: "Mani = No / There isn't any" },
+        // Basic negation markers with distinct icons
+        { kiche: "mani", english: "no", spanish: "no", icon: "🙅", culture: "Used to answer 'no' to questions. Simple and direct.", difficulty: 'soldier', example: "Mani = No" },
+        { kiche: "je'", english: "yes", spanish: "sí", icon: "👍", culture: "Used to answer 'yes' to questions. Affirm with je'!", difficulty: 'soldier', example: "Je' = Yes" },
+        // Simple negated sentences using verbs they might know
+        { kiche: "na kinwar taj", english: "I don't sleep", spanish: "no duermo", icon: "🌙", culture: "Na...taj wraps around the verb. Na + verb + taj = not.", difficulty: 'soldier', example: "war = sleep → na kinwar taj = I don't sleep" },
+        { kiche: "na kimb'e taj", english: "I don't go", spanish: "no voy", icon: "🚷", culture: "Negating 'b'e' (to go). The two-part negation surrounds the conjugated verb.", difficulty: 'soldier', example: "b'e = go → na kimb'e taj = I don't go" },
     ],
     warrior: [
-        { kiche: "na weta'm taj", english: "I don't know", spanish: "no sé", icon: "🤷", culture: "Very common phrase. Literally: not I-know not.", difficulty: 'warrior', example: "Na weta'm taj = I don't know" },
-        { kiche: "na k'o taj", english: "there isn't", spanish: "no hay", icon: "0️⃣", culture: "Negated existential. Na k'o taj ja' = There isn't water.", difficulty: 'warrior', example: "Na k'o taj = There isn't" },
+        { kiche: "na weta'm taj", english: "I don't know", spanish: "no sé", icon: "❓", culture: "Very common phrase. Eta'm = to know.", difficulty: 'warrior', example: "weta'm = I know → na weta'm taj = I don't know" },
+        { kiche: "na k'o taj", english: "there isn't", spanish: "no hay", icon: "🚫", culture: "Negated existential. K'o = there is.", difficulty: 'warrior', example: "K'o = there is → na k'o taj = there isn't" },
+        { kiche: "na kinwa' taj", english: "I don't eat", spanish: "no como", icon: "🍽️", culture: "Negating wa' (to eat). Common for dietary restrictions.", difficulty: 'warrior', example: "wa' = eat → na kinwa' taj = I don't eat" },
+        { kiche: "na kinpetik taj", english: "I don't come", spanish: "no vengo", icon: "↩️", culture: "Negating pet (to come).", difficulty: 'warrior', example: "pet = come → na kinpetik taj = I don't come" },
+        { kiche: "na kinch'aw taj", english: "I don't speak", spanish: "no hablo", icon: "🤐", culture: "Negating ch'aw (to speak). Na kinch'aw taj K'iche' = I don't speak K'iche'.", difficulty: 'warrior', example: "ch'aw = speak → na kinch'aw taj = I don't speak" },
     ],
     hero: [
-        { kiche: "majun", english: "nothing/nobody", spanish: "nada/nadie", icon: "🕳️", culture: "Stronger than mani. Majun k'o = absolutely nothing.", difficulty: 'hero', example: "Majun = Nothing at all" },
-        { kiche: "mat-", english: "don't! (negative command)", spanish: "¡no! (imperativo)", icon: "🛑", culture: "Matb'e! = Don't go! Used for warnings and prohibitions.", difficulty: 'hero', example: "Matwa'ik! = Don't eat!" },
+        { kiche: "majun", english: "nothing/nobody", spanish: "nada/nadie", icon: "⭕", culture: "Stronger than mani. Majun k'o = absolutely nothing.", difficulty: 'hero', example: "Majun k'o = There is absolutely nothing" },
+        { kiche: "matb'e", english: "don't go!", spanish: "¡no vayas!", icon: "✋", culture: "Mat- is the negative command prefix. Matb'e! = Don't go!", difficulty: 'hero', example: "Jab'e! = Go! → Matb'e! = Don't go!" },
+        { kiche: "matwa'", english: "don't eat!", spanish: "¡no comas!", icon: "🚯", culture: "Negative command for eating. Used for warnings.", difficulty: 'hero', example: "Chatwa'! = Eat! → Matwa'! = Don't eat!" },
+        { kiche: "na katb'e taj", english: "you don't go", spanish: "no vas", icon: "🚶‍♂️", culture: "Second person negation. Kat- = you.", difficulty: 'hero', example: "katb'e = you go → na katb'e taj = you don't go" },
+        { kiche: "na kab'e taj", english: "he/she doesn't go", spanish: "él/ella no va", icon: "🧍", culture: "Third person negation. Ka- = he/she.", difficulty: 'hero', example: "kab'e = he/she goes → na kab'e taj = he/she doesn't go" },
+    ],
+};
+
+// Yes/No questions and sentence translations for negation practice
+const NEGATION_QUESTIONS = {
+    yesNo: [
+        { question: "Kawatik?", questionEn: "Are you sleeping?", questionEs: "¿Estás durmiendo?", correctAnswer: "mani", correctAnswerAlt: "je'", difficulty: 'soldier' },
+        { question: "K'o awa?", questionEn: "Is there food?", questionEs: "¿Hay comida?", correctAnswer: "mani", correctAnswerAlt: "je'", difficulty: 'soldier' },
+        { question: "Katb'e pa tinamit?", questionEn: "Are you going to the town?", questionEs: "¿Vas al pueblo?", correctAnswer: "mani", correctAnswerAlt: "je'", difficulty: 'soldier' },
+        { question: "Aweta'm K'iche'?", questionEn: "Do you know K'iche'?", questionEs: "¿Sabes K'iche'?", correctAnswer: "je'", correctAnswerAlt: "mani", difficulty: 'warrior' },
+        { question: "Katwa'ik?", questionEn: "Are you eating?", questionEs: "¿Estás comiendo?", correctAnswer: "mani", correctAnswerAlt: "je'", difficulty: 'warrior' },
+        { question: "K'o ja'?", questionEn: "Is there water?", questionEs: "¿Hay agua?", correctAnswer: "je'", correctAnswerAlt: "mani", difficulty: 'warrior' },
+    ],
+    sentencePairs: [
+        // Affirmative → Negative translations
+        { affirmative: "kimb'e", affirmativeEn: "I go", negative: "na kimb'e taj", negativeEn: "I don't go", verb: "b'e", difficulty: 'soldier' },
+        { affirmative: "kinwarik", affirmativeEn: "I sleep", negative: "na kinwar taj", negativeEn: "I don't sleep", verb: "war", difficulty: 'soldier' },
+        { affirmative: "kinwa'ik", affirmativeEn: "I eat", negative: "na kinwa' taj", negativeEn: "I don't eat", verb: "wa'", difficulty: 'warrior' },
+        { affirmative: "kinpetik", affirmativeEn: "I come", negative: "na kinpetik taj", negativeEn: "I don't come", verb: "pet", difficulty: 'warrior' },
+        { affirmative: "k'o", affirmativeEn: "there is", negative: "na k'o taj", negativeEn: "there isn't", verb: "k'o", difficulty: 'warrior' },
+        { affirmative: "weta'm", affirmativeEn: "I know", negative: "na weta'm taj", negativeEn: "I don't know", verb: "eta'm", difficulty: 'warrior' },
+        { affirmative: "kinch'awik", affirmativeEn: "I speak", negative: "na kinch'aw taj", negativeEn: "I don't speak", verb: "ch'aw", difficulty: 'hero' },
+        { affirmative: "katb'e", affirmativeEn: "you go", negative: "na katb'e taj", negativeEn: "you don't go", verb: "b'e", difficulty: 'hero' },
     ],
 };
 
@@ -1594,6 +1627,14 @@ function generateLessonQuestions(lessonId, count = 5, learnedWords = []) {
         questions.push(...phraseQuestions.slice(0, numConversation));
     }
     
+    // For negation, add special question types
+    if (lessonId === 'negation') {
+        const negationQuestions = generateNegationQuestions(count, difficulty);
+        // Mix negation-specific questions with standard ones
+        const numNegation = Math.min(Math.ceil(count * 0.6), negationQuestions.length);
+        questions.push(...negationQuestions.slice(0, numNegation));
+    }
+    
     // Check for recall questions - if user has learned words, include some
     const recallItems = items.filter(item => 
         learnedWords.some(lw => lw.kiche === item.kiche)
@@ -1698,6 +1739,140 @@ function generateConversationQuestions(count, difficulty) {
     }
     
     return questions;
+}
+
+// Generate special questions for negation practice
+function generateNegationQuestions(count, difficulty) {
+    const questions = [];
+    const lang = typeof getLanguage === 'function' ? getLanguage() : 'en';
+    
+    // Filter by difficulty
+    const yesNoQuestions = NEGATION_QUESTIONS.yesNo.filter(q => {
+        if (difficulty === DIFFICULTY.SOLDIER) return q.difficulty === 'soldier';
+        if (difficulty === DIFFICULTY.WARRIOR) return q.difficulty === 'soldier' || q.difficulty === 'warrior';
+        return true; // Hero gets all
+    });
+    
+    const sentencePairs = NEGATION_QUESTIONS.sentencePairs.filter(q => {
+        if (difficulty === DIFFICULTY.SOLDIER) return q.difficulty === 'soldier';
+        if (difficulty === DIFFICULTY.WARRIOR) return q.difficulty === 'soldier' || q.difficulty === 'warrior';
+        return true;
+    });
+    
+    // 1. Yes/No answer questions - "How do you answer 'no' to this question?"
+    const selectedYesNo = yesNoQuestions.sort(() => Math.random() - 0.5).slice(0, Math.ceil(count / 3));
+    selectedYesNo.forEach(q => {
+        const askForNo = Math.random() > 0.5;
+        questions.push({
+            type: QUESTION_TYPE.MULTIPLE_CHOICE,
+            instruction: lang === 'es' 
+                ? (askForNo ? '¿Cómo dices "no" a esta pregunta?' : '¿Cómo dices "sí" a esta pregunta?')
+                : (askForNo ? 'How do you say "no" to this question?' : 'How do you say "yes" to this question?'),
+            prompt: q.question,
+            promptHint: lang === 'es' ? q.questionEs : q.questionEn,
+            correctAnswer: askForNo ? 'mani' : 'je\'',
+            choices: ['mani', 'je\'', 'na...taj', 'majun'].sort(() => Math.random() - 0.5),
+            culture: askForNo 
+                ? 'Mani is used to answer "no" to yes/no questions.'
+                : 'Je\' is used to answer "yes" to yes/no questions.',
+            lessonId: 'negation',
+            word: { kiche: askForNo ? 'mani' : 'je\'', english: askForNo ? 'no' : 'yes' },
+        });
+    });
+    
+    // 2. Affirmative to Negative transformation
+    const selectedPairs = sentencePairs.sort(() => Math.random() - 0.5).slice(0, Math.ceil(count / 3));
+    selectedPairs.forEach(pair => {
+        // Randomly choose: negate affirmative OR affirm negative
+        const toNegative = Math.random() > 0.3; // More often ask to negate
+        
+        if (toNegative) {
+            // "How do you say 'I don't go'?"
+            questions.push({
+                type: QUESTION_TYPE.MULTIPLE_CHOICE,
+                instruction: lang === 'es' 
+                    ? `¿Cómo niegas "${pair.affirmativeEn}"?`
+                    : `How do you negate "${pair.affirmativeEn}"?`,
+                prompt: `${pair.affirmative} → ???`,
+                promptHint: `${pair.affirmativeEn} → ${pair.negativeEn}`,
+                correctAnswer: pair.negative,
+                choices: generateNegationChoices(pair.negative, sentencePairs),
+                culture: `Na...taj wraps around the verb: ${pair.affirmative} → ${pair.negative}`,
+                lessonId: 'negation',
+                word: { kiche: pair.negative, english: pair.negativeEn },
+            });
+        } else {
+            // "What does 'na kimb'e taj' mean?"
+            questions.push({
+                type: QUESTION_TYPE.MULTIPLE_CHOICE,
+                instruction: lang === 'es' 
+                    ? '¿Qué significa esta oración?'
+                    : 'What does this sentence mean?',
+                prompt: pair.negative,
+                correctAnswer: pair.negativeEn,
+                choices: [pair.negativeEn, pair.affirmativeEn, 
+                    sentencePairs[(sentencePairs.indexOf(pair) + 1) % sentencePairs.length].negativeEn,
+                    sentencePairs[(sentencePairs.indexOf(pair) + 2) % sentencePairs.length].affirmativeEn
+                ].sort(() => Math.random() - 0.5),
+                culture: `${pair.negative} = ${pair.negativeEn}`,
+                lessonId: 'negation',
+                word: { kiche: pair.negative, english: pair.negativeEn },
+            });
+        }
+    });
+    
+    // 3. Negative command questions (for warrior+)
+    if (difficulty !== DIFFICULTY.SOLDIER) {
+        const negativeCommands = [
+            { positive: "Jab'e!", positiveEn: "Go!", negative: "Matb'e!", negativeEn: "Don't go!" },
+            { positive: "Chatwa'!", positiveEn: "Eat!", negative: "Matwa'!", negativeEn: "Don't eat!" },
+            { positive: "Chach'awa!", positiveEn: "Speak!", negative: "Match'awa!", negativeEn: "Don't speak!" },
+        ];
+        
+        const selectedCommands = negativeCommands.sort(() => Math.random() - 0.5).slice(0, 1);
+        selectedCommands.forEach(cmd => {
+            questions.push({
+                type: QUESTION_TYPE.MULTIPLE_CHOICE,
+                instruction: lang === 'es'
+                    ? `Si "${cmd.positiveEn}" es "${cmd.positive}", ¿cómo dices "${cmd.negativeEn}"?`
+                    : `If "${cmd.positiveEn}" is "${cmd.positive}", how do you say "${cmd.negativeEn}"?`,
+                prompt: `${cmd.positive} → ???`,
+                correctAnswer: cmd.negative,
+                choices: [cmd.negative, cmd.positive, 
+                    negativeCommands[(negativeCommands.indexOf(cmd) + 1) % negativeCommands.length].negative,
+                    'Mani ' + cmd.positive.toLowerCase()
+                ].sort(() => Math.random() - 0.5),
+                culture: `Positive commands use Ja-/Cha-, negative commands use Mat-. ${cmd.positive} → ${cmd.negative}`,
+                lessonId: 'negation',
+                word: { kiche: cmd.negative, english: cmd.negativeEn },
+            });
+        });
+    }
+    
+    return questions;
+}
+
+// Helper to generate plausible wrong answers for negation
+function generateNegationChoices(correct, sentencePairs) {
+    const choices = [correct];
+    
+    // Add other negated sentences as wrong choices
+    const others = sentencePairs
+        .filter(p => p.negative !== correct)
+        .map(p => p.negative)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 2);
+    choices.push(...others);
+    
+    // Add an affirmative as a tricky wrong answer
+    const affirmative = sentencePairs.find(p => p.negative === correct);
+    if (affirmative) {
+        choices.push(affirmative.affirmative);
+    } else {
+        choices.push('mani');
+    }
+    
+    return choices.sort(() => Math.random() - 0.5);
 }
 
 // Create a recall question - see the icon, type the word you learned
@@ -2000,3 +2175,5 @@ window.VOCABULARY_WARFARE = VOCABULARY_WARFARE;
 window.VOCABULARY_PLACES = VOCABULARY_PLACES;
 window.VOCABULARY_SPIRITUAL = VOCABULARY_SPIRITUAL;
 window.VOCABULARY_ADVANCED = VOCABULARY_ADVANCED;
+window.NEGATION_CONTENT = NEGATION_CONTENT;
+window.NEGATION_QUESTIONS = NEGATION_QUESTIONS;
