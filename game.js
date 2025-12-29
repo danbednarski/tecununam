@@ -1845,6 +1845,19 @@ function startBattleQuiz(node, type) {
         `;
     }
     
+    // Dynamically create progress dots based on question count
+    const dotsContainer = document.getElementById('progress-dots');
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < questionCount; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'dot';
+        dotsContainer.appendChild(dot);
+    }
+    
+    // Update round counter format (e.g., "1/10" instead of "1/5")
+    document.querySelector('.round-counter').innerHTML = 
+        `<span data-i18n="round">${t('round')}</span> <span id="round-number">1</span>/${questionCount}`;
+    
     updateBattleUI();
     showQuestion();
     showScreen('battle');
@@ -2102,8 +2115,10 @@ function showFeedback(isCorrect, question) {
     // Show next button
     document.getElementById('submit-answer').classList.add('hidden');
     document.getElementById('next-question').classList.remove('hidden');
+    const totalQuestions = GameState.currentBattle?.questionCount || GameState.currentQuestions.length;
+    const isLastQuestion = GameState.currentQuestionIndex >= totalQuestions - 1;
     document.getElementById('next-question').textContent = 
-        GameState.currentQuestionIndex < 4 ? 'Next Challenge' : 'See Results';
+        isLastQuestion ? 'See Results' : 'Next Challenge';
 }
 
 function nextQuestion() {
