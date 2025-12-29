@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Almendra:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-has-save="false">
     <div id="game-container">
         <!-- Title Screen -->
         <div id="title-screen" class="screen active">
@@ -24,7 +24,7 @@
                 
                 <div class="title-buttons">
                     <button id="start-game" class="stone-button" data-i18n="startGame">Begin Campaign</button>
-                    <button id="continue-game" class="stone-button secondary hidden" data-i18n="continueGame">Continue Campaign</button>
+                    <button id="continue-game" class="stone-button secondary" data-i18n="continueGame">Continue Campaign</button>
                 </div>
                 
                 <div class="title-options">
@@ -84,9 +84,9 @@
                     <div class="army-flag"></div>
                 </div>
                 
-                <!-- Territory info panel -->
-                <div id="territory-info" class="territory-panel hidden">
-                    <button id="close-panel" class="close-button">✕</button>
+                <!-- Territory info panel - using popover API -->
+                <div id="territory-info" class="territory-panel" popover>
+                    <button id="close-panel" class="close-button" popovertarget="territory-info" popovertargetaction="hide">✕</button>
                     <h3 id="territory-name"></h3>
                     <p id="territory-desc"></p>
                     <div id="territory-status"></div>
@@ -96,8 +96,8 @@
                     </div>
                 </div>
                 
-                <!-- Alert for Spanish attacks -->
-                <div id="attack-alert" class="attack-alert hidden">
+                <!-- Alert for Spanish attacks - using dialog element -->
+                <dialog id="attack-alert" class="attack-dialog">
                     <div class="alert-content">
                         <h3>⚠️ <span data-i18n="spanishAttack">Spanish Attack!</span></h3>
                         <p id="alert-message"></p>
@@ -106,7 +106,7 @@
                             <button id="btn-ignore-attack" class="stone-button small secondary" data-i18n="continueForward">Continue Forward</button>
                         </div>
                     </div>
-                </div>
+                </dialog>
             </div>
 
             <div class="map-legend">
@@ -151,7 +151,7 @@
                 </div>
             </div>
 
-            <div class="lesson-area">
+            <div class="lesson-area" data-input-mode="text" data-show-feedback="false" data-answered="false">
                 <div class="lesson-prompt">
                     <p class="instruction" id="lesson-instruction">Translate this word to K'iche':</p>
                     <p class="word-display" id="word-to-translate">Water</p>
@@ -162,7 +162,7 @@
                     <input type="text" id="answer-input" class="answer-input" data-i18n-placeholder="typeAnswer" placeholder="Type your answer..." autocomplete="off">
                     
                     <!-- For multiple choice -->
-                    <div id="choices-container" class="choices-container hidden">
+                    <div id="choices-container" class="choices-container">
                         <button class="choice-btn"></button>
                         <button class="choice-btn"></button>
                         <button class="choice-btn"></button>
@@ -170,14 +170,14 @@
                     </div>
                 </div>
 
-                <div class="lesson-feedback hidden" id="feedback">
+                <div class="lesson-feedback" id="feedback">
                     <p id="feedback-text"></p>
                     <p id="correct-answer"></p>
                     <p id="feedback-explanation" class="feedback-explanation"></p>
                 </div>
 
                 <button id="submit-answer" class="stone-button" data-i18n="submitAnswer">Submit Answer</button>
-                <button id="next-question" class="stone-button hidden" data-i18n="nextChallenge">Next Challenge</button>
+                <button id="next-question" class="stone-button" data-i18n="nextChallenge">Next Challenge</button>
             </div>
 
             <div class="battle-progress">
@@ -204,8 +204,8 @@
                     <!-- Tutorial cards will be inserted here -->
                 </div>
                 
-                <div class="tutorial-navigation">
-                    <button id="tutorial-prev" class="stone-button secondary" disabled>
+                <div class="tutorial-navigation" data-at-start="true" data-at-end="false">
+                    <button id="tutorial-prev" class="stone-button secondary">
                         <span>←</span> <span data-i18n="previous">Previous</span>
                     </button>
                     <div class="tutorial-progress">
@@ -216,7 +216,7 @@
                     </button>
                 </div>
                 
-                <button id="start-quiz" class="stone-button large hidden" data-i18n="beginQuiz">Begin Quiz!</button>
+                <button id="start-quiz" class="stone-button large" data-i18n="beginQuiz">Begin Quiz!</button>
             </div>
         </div>
 

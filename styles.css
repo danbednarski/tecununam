@@ -703,11 +703,8 @@ body::after {
 }
 
 /* Territory Panel - Stone tablet aesthetic */
+/* Note: Uses native popover API - positioning handled in popover section */
 .territory-panel {
-    position: absolute;
-    right: var(--spacing-lg);
-    top: 50%;
-    transform: translateY(-50%);
     background: 
         /* Stone texture simulation */
         linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%, rgba(0,0,0,0.1) 100%),
@@ -755,9 +752,7 @@ body::after {
     to { transform: translateY(-50%) translateX(0); opacity: 1; }
 }
 
-.territory-panel.hidden {
-    display: none;
-}
+/* .territory-panel.hidden removed - now uses popover API */
 
 .close-button {
     position: absolute;
@@ -854,24 +849,17 @@ body::after {
     flex-wrap: wrap;
 }
 
-/* Attack Alert */
-.attack-alert {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 300;
-    animation: alertPop 0.4s ease-out;
-}
+/* Attack Alert - now uses <dialog> element */
+/* Old .attack-alert styles removed - see dialog.attack-dialog in utility section */
 
 @keyframes alertPop {
-    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-    70% { transform: translate(-50%, -50%) scale(1.05); }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    0% { transform: scale(0.5); opacity: 0; }
+    70% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
 }
 
-.attack-alert.hidden {
-    display: none;
+dialog.attack-dialog[open] {
+    animation: alertPop 0.4s ease-out;
 }
 
 .alert-content {
@@ -1886,15 +1874,9 @@ body::after {
         order: -1;
     }
     
+    /* Mobile territory panel positioning handled in popover section */
     .territory-panel {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: auto;
-        transform: none;
         clip-path: none;
-        max-width: 100%;
     }
     
     .choices-container {
@@ -2081,3 +2063,140 @@ body::after {
 .mt-1 { margin-top: var(--spacing-sm); }
 .mt-2 { margin-top: var(--spacing-md); }
 .mt-3 { margin-top: var(--spacing-lg); }
+
+/* ========================================
+   DATA ATTRIBUTE BASED VISIBILITY
+   Using CSS :has() and attribute selectors
+   ======================================== */
+
+/* Continue button visibility based on save state */
+body:not([data-has-save="true"]) #continue-game {
+    display: none;
+}
+
+/* Lesson input mode switching */
+.lesson-area[data-input-mode="choice"] .answer-input {
+    display: none;
+}
+
+.lesson-area[data-input-mode="text"] .choices-container {
+    display: none;
+}
+
+/* Feedback visibility */
+.lesson-area:not([data-show-feedback="true"]) .lesson-feedback {
+    display: none;
+}
+
+/* Submit vs Next button visibility */
+.lesson-area:not([data-answered="true"]) #next-question {
+    display: none;
+}
+
+.lesson-area[data-answered="true"] #submit-answer {
+    display: none;
+}
+
+/* Multiple choice hides submit button */
+.lesson-area[data-input-mode="choice"]:not([data-answered="true"]) #submit-answer {
+    display: none;
+}
+
+/* Tutorial navigation based on position */
+.tutorial-navigation[data-at-start="true"] #tutorial-prev {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Start quiz button - shown only at end of tutorial */
+.tutorial-navigation:not([data-at-end="true"]) + #start-quiz {
+    display: none;
+}
+
+.tutorial-navigation[data-at-end="true"] #tutorial-next {
+    display: none;
+}
+
+/* ========================================
+   DIALOG ELEMENT STYLES
+   Native dialog styling
+   ======================================== */
+
+dialog.attack-dialog {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    background: transparent;
+    max-width: 90%;
+    width: 400px;
+}
+
+dialog.attack-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+dialog.attack-dialog .alert-content {
+    background: linear-gradient(180deg, var(--jade-deep) 0%, var(--obsidian) 100%);
+    border: 3px solid var(--terracotta);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+dialog.attack-dialog h3 {
+    color: var(--terracotta);
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+dialog.attack-dialog p {
+    color: var(--parchment);
+    margin-bottom: 1.5rem;
+}
+
+dialog.attack-dialog .alert-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   POPOVER ELEMENT STYLES
+   Native popover styling
+   ======================================== */
+
+[popover] {
+    border: none;
+    padding: 0;
+    background: transparent;
+}
+
+[popover]:popover-open {
+    display: block;
+}
+
+/* Territory panel popover - uses fixed positioning in top layer */
+#territory-info[popover] {
+    position: fixed;
+    margin: 0;
+    inset: unset;
+    right: var(--spacing-lg);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Mobile: territory panel at bottom */
+@media (max-width: 768px) {
+    #territory-info[popover] {
+        bottom: 0;
+        top: unset;
+        right: 0;
+        left: 0;
+        transform: none;
+        max-width: 100%;
+    }
+}
