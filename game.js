@@ -2270,6 +2270,9 @@ function endBattle() {
     document.getElementById('army-change').textContent = result.armyChange >= 0 ? `+${result.armyChange}` : result.armyChange;
     document.getElementById('words-learned').textContent = GameState.wordsLearned.size;
     
+    // Auto-save after battle completion
+    autoSave();
+    
     showScreen('result');
 }
 
@@ -2309,6 +2312,9 @@ function advanceTurn() {
     
     // Check win/loss
     if (checkGameOver()) return;
+    
+    // Auto-save after each turn
+    autoSave();
     
     updateStats();
     renderMap();
@@ -2533,6 +2539,9 @@ function startGame() {
     // Position army at Q'umarkaj
     GameState.armyPosition = 'qumarkaj';
     
+    // Auto-save new game immediately
+    autoSave();
+    
     // Show map screen first so container has dimensions
     showScreen('map');
     
@@ -2594,6 +2603,16 @@ function setupEventListeners() {
 // ========================================
 
 const SAVE_KEY = 'tecunuman_save';
+
+// Auto-save silently (no UI feedback)
+function autoSave() {
+    try {
+        saveGame();
+        DEBUG.log('Game auto-saved');
+    } catch (e) {
+        DEBUG.log('Auto-save failed:', e);
+    }
+}
 
 function saveGame() {
     const saveData = {
@@ -2739,7 +2758,9 @@ function saveAndQuit() {
 
 function checkForSavedGame() {
     const continueBtn = document.getElementById('continue-game');
-    if (hasSavedGame()) {
+    const hasSave = hasSavedGame();
+    DEBUG.log('Checking for saved game:', hasSave);
+    if (hasSave) {
         continueBtn.classList.remove('hidden');
     } else {
         continueBtn.classList.add('hidden');
