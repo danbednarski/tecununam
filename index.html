@@ -263,9 +263,13 @@
         </div>
     </div>
 
+    <!-- TypeScript entry point (Vite) - loads i18n.ts -->
+    <script type="module" src="/src/main.ts"></script>
+    
+    <!-- Legacy JavaScript files (will migrate to TS incrementally) -->
     <script src="vocabulary.js"></script>
     <script src="lessons.js"></script>
-    <script src="i18n.js"></script>
+    <!-- i18n.js replaced by src/i18n.ts loaded via main.ts above -->
     <script src="game.js"></script>
 </body>
 </html>
