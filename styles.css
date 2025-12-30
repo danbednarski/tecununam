@@ -478,24 +478,9 @@ body::after {
     flex-shrink: 1;
 }
 
-/* Colorful Mayan frame around the image */
+/* Colorful Mayan frame around the image - disabled */
 .quetzal-emblem::before {
-    content: '';
-    position: absolute;
-    inset: -12px;
-    background: 
-        /* Outer glow */
-        radial-gradient(ellipse at center, transparent 60%, rgba(212, 168, 67, 0.2) 100%);
-    border: 4px solid transparent;
-    border-image: repeating-linear-gradient(
-        45deg,
-        var(--gold-sun) 0px, var(--gold-sun) 8px,
-        var(--terracotta) 8px, var(--terracotta) 16px,
-        var(--jade-light) 16px, var(--jade-light) 24px,
-        var(--maya-blue) 24px, var(--maya-blue) 32px
-    ) 4;
-    z-index: 0;
-    pointer-events: none;
+    display: none;
 }
 
 /* Glowing sacred aura */
@@ -503,13 +488,6 @@ body::after {
     content: '';
     position: absolute;
     inset: -30px;
-    background: 
-        radial-gradient(ellipse at center, 
-            rgba(212, 168, 67, 0.25) 0%, 
-            rgba(45, 125, 95, 0.15) 30%,
-            rgba(74, 144, 164, 0.1) 50%, 
-            transparent 70%
-        );
     z-index: -1;
     pointer-events: none;
     animation: pulse-glow 4s ease-in-out infinite alternate;
