@@ -1,0 +1,2266 @@
+/* ========================================
+   TECUN UMAN - Mayan-Inspired Game Styles
+   Authentic Maya color palette & tile patterns
+   ======================================== */
+
+:root {
+    /* Authentic Mayan Color Palette */
+    /* Based on Maya codices and ceramic traditions */
+    --maya-blue: #4a90a4;          /* Famous Maya Blue pigment */
+    --maya-blue-deep: #2d6a7a;
+    --jade-deep: #1a4d3e;          /* Sacred jade */
+    --jade-light: #2d7d5f;
+    --jade-glow: #3fa878;
+    --obsidian: #1a1a2e;           /* Volcanic glass */
+    --obsidian-light: #16213e;
+    --gold-sun: #d4a843;           /* Solar gold */
+    --gold-bright: #f5c542;
+    --terracotta: #c45c3b;         /* Ceramic red-orange */
+    --terracotta-dark: #8b3a2b;
+    --blood-red: #8b0000;          /* Sacrificial red */
+    --maya-red: #b22222;           /* Cochineal red */
+    --cacao-brown: #3d2314;        /* Cacao pod brown */
+    --maize-yellow: #e6c35c;       /* Corn/maize yellow */
+    --sky-blue: #4a90a4;
+    --stone-light: #d4c4a8;        /* Limestone */
+    --stone-dark: #8b7355;
+    --parchment: #f4e4bc;          /* Amate paper */
+    --spanish-red: #c41e3a;
+    --spanish-gold: #ffd700;
+    --fog-color: #2a2a4a;
+    --jungle-green: #228b22;
+    
+    /* Typography */
+    --font-display: 'Cinzel', serif;
+    --font-body: 'Almendra', serif;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--cacao-brown);
+    color: var(--parchment);
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Mayan stepped pyramid / temple tile pattern */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        /* Stepped pyramid pattern */
+        linear-gradient(135deg, 
+            transparent 25%, 
+            rgba(212, 168, 67, 0.03) 25%, 
+            rgba(212, 168, 67, 0.03) 50%, 
+            transparent 50%, 
+            transparent 75%, 
+            rgba(212, 168, 67, 0.03) 75%
+        ),
+        linear-gradient(-135deg, 
+            transparent 25%, 
+            rgba(45, 125, 95, 0.03) 25%, 
+            rgba(45, 125, 95, 0.03) 50%, 
+            transparent 50%, 
+            transparent 75%, 
+            rgba(45, 125, 95, 0.03) 75%
+        );
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Additional decorative layer */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        /* Corner glyphs pattern */
+        radial-gradient(circle at 0% 0%, rgba(212, 168, 67, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 100% 0%, rgba(45, 125, 95, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 0% 100%, rgba(45, 125, 95, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 100% 100%, rgba(212, 168, 67, 0.05) 0%, transparent 20%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ========================================
+   TITLE SCREEN
+   ======================================== */
+
+#title-screen {
+    background: 
+        /* Central sacred glow */
+        radial-gradient(ellipse at 50% 40%, rgba(212, 168, 67, 0.15) 0%, transparent 50%),
+        /* Maya Blue sacred sky emanating from top */
+        radial-gradient(ellipse at 50% 0%, rgba(74, 144, 164, 0.4) 0%, transparent 60%),
+        /* Jade glow from corners */
+        radial-gradient(circle at 0% 0%, rgba(45, 125, 95, 0.3) 0%, transparent 40%),
+        radial-gradient(circle at 100% 0%, rgba(45, 125, 95, 0.3) 0%, transparent 40%),
+        /* Terracotta warmth from bottom */
+        radial-gradient(ellipse at 50% 100%, rgba(196, 92, 59, 0.25) 0%, transparent 50%),
+        /* Deep obsidian base */
+        linear-gradient(180deg, var(--obsidian) 0%, #0d0d1a 100%);
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: var(--spacing-md);
+}
+
+/* ========================================
+   MAYAN STEP-FRET (XICALCOLIUHQUI) BORDERS
+   Authentic geometric patterns from Maya codices
+   ======================================== */
+
+/* Bottom border - Stepped pyramid with colorful bands */
+#title-screen::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: 
+        /* Top decorative line - gold */
+        linear-gradient(0deg,
+            transparent 55px,
+            var(--gold-sun) 55px,
+            var(--gold-sun) 58px,
+            transparent 58px
+        ),
+        /* Step-fret pattern layer - terracotta */
+        repeating-linear-gradient(90deg,
+            var(--terracotta) 0px, var(--terracotta) 15px,
+            transparent 15px, transparent 20px,
+            var(--terracotta) 20px, var(--terracotta) 25px,
+            transparent 25px, transparent 40px
+        ),
+        /* Jade accent band */
+        linear-gradient(0deg,
+            transparent 35px,
+            var(--jade-deep) 35px,
+            var(--jade-deep) 45px,
+            transparent 45px
+        ),
+        /* Maya blue band */
+        linear-gradient(0deg,
+            transparent 20px,
+            var(--maya-blue-deep) 20px,
+            var(--maya-blue-deep) 30px,
+            transparent 30px
+        ),
+        /* Base terracotta band */
+        linear-gradient(0deg,
+            var(--terracotta-dark) 0px,
+            var(--terracotta-dark) 15px,
+            transparent 15px
+        );
+    z-index: 1;
+}
+
+/* Top border - Matching step-fret pattern */
+#title-screen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: 
+        /* Gold accent line */
+        linear-gradient(180deg,
+            transparent 35px,
+            var(--gold-sun) 35px,
+            var(--gold-sun) 38px,
+            transparent 38px
+        ),
+        /* Step-fret pattern - jade */
+        repeating-linear-gradient(90deg,
+            var(--jade-light) 0px, var(--jade-light) 10px,
+            transparent 10px, transparent 15px,
+            var(--jade-light) 15px, var(--jade-light) 20px,
+            transparent 20px, transparent 30px
+        ),
+        /* Maya blue top band */
+        linear-gradient(180deg,
+            var(--maya-blue-deep) 0px,
+            var(--maya-blue-deep) 12px,
+            transparent 12px
+        ),
+        /* Terracotta accent */
+        linear-gradient(180deg,
+            transparent 15px,
+            var(--terracotta) 15px,
+            var(--terracotta) 25px,
+            transparent 25px
+        );
+    z-index: 1;
+}
+
+.title-content {
+    text-align: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    padding-top: 50px;
+    padding-bottom: var(--spacing-xl);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--spacing-xs);
+}
+
+/* Decorative corner glyphs using CSS shapes */
+.title-content::before,
+.title-content::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Top-left serpent head motif */
+.title-content::before {
+    top: 60px;
+    left: 40px;
+    background: 
+        /* Serpent eye */
+        radial-gradient(circle at 60% 40%, var(--gold-sun) 6px, transparent 6px),
+        /* Serpent jaw - stepped */
+        conic-gradient(from 180deg at 50% 50%,
+            var(--jade-light) 0deg, var(--jade-light) 45deg,
+            transparent 45deg, transparent 90deg,
+            var(--terracotta) 90deg, var(--terracotta) 135deg,
+            transparent 135deg, transparent 180deg,
+            var(--maya-blue) 180deg, var(--maya-blue) 225deg,
+            transparent 225deg
+        );
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 70% 30%, 70% 60%, 40% 60%, 40% 100%, 0 100%);
+}
+
+/* Top-right serpent head motif - mirrored */
+.title-content::after {
+    top: 60px;
+    right: 40px;
+    background: 
+        /* Serpent eye */
+        radial-gradient(circle at 40% 40%, var(--gold-sun) 6px, transparent 6px),
+        /* Serpent jaw - stepped */
+        conic-gradient(from 0deg at 50% 50%,
+            var(--jade-light) 0deg, var(--jade-light) 45deg,
+            transparent 45deg, transparent 90deg,
+            var(--terracotta) 90deg, var(--terracotta) 135deg,
+            transparent 135deg, transparent 180deg,
+            var(--maya-blue) 180deg, var(--maya-blue) 225deg,
+            transparent 225deg
+        );
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 60% 100%, 60% 60%, 30% 60%, 30% 30%, 0 30%);
+}
+
+/* Mayan step-fret (xicalcoliuhqui) side decorations */
+.glyph-border {
+    position: fixed;
+    width: 25px;
+    top: 50px;
+    bottom: 50px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.glyph-border.top {
+    left: 0;
+    background: 
+        /* Vertical step-fret pattern */
+        repeating-linear-gradient(180deg,
+            var(--gold-sun) 0px, var(--gold-sun) 8px,
+            transparent 8px, transparent 12px,
+            var(--terracotta) 12px, var(--terracotta) 20px,
+            transparent 20px, transparent 24px,
+            var(--jade-light) 24px, var(--jade-light) 32px,
+            transparent 32px, transparent 40px
+        ),
+        /* Stepped edge effect */
+        linear-gradient(90deg,
+            var(--obsidian) 0px,
+            var(--obsidian) 5px,
+            transparent 5px
+        );
+    border-right: 2px solid var(--gold-sun);
+    opacity: 0.7;
+}
+
+.glyph-border.bottom {
+    right: 0;
+    background: 
+        /* Vertical step-fret pattern - offset */
+        repeating-linear-gradient(180deg,
+            var(--jade-light) 0px, var(--jade-light) 8px,
+            transparent 8px, transparent 12px,
+            var(--terracotta) 12px, var(--terracotta) 20px,
+            transparent 20px, transparent 24px,
+            var(--gold-sun) 24px, var(--gold-sun) 32px,
+            transparent 32px, transparent 40px
+        ),
+        /* Stepped edge effect */
+        linear-gradient(270deg,
+            var(--obsidian) 0px,
+            var(--obsidian) 5px,
+            transparent 5px
+        );
+    border-left: 2px solid var(--gold-sun);
+    opacity: 0.7;
+}
+
+@keyframes glyphShimmer {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+}
+
+.game-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 900;
+    color: var(--gold-bright);
+    text-shadow: 
+        0 0 40px rgba(212, 168, 67, 0.8),
+        0 0 80px rgba(212, 168, 67, 0.4),
+        0 0 120px rgba(196, 92, 59, 0.3),
+        0 2px 0 var(--terracotta),
+        0 4px 0 var(--terracotta-dark),
+        0 6px 0 var(--cacao-brown),
+        0 8px 20px rgba(0,0,0,0.6);
+    letter-spacing: 0.2em;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+    position: relative;
+    margin-bottom: 0.5rem;
+    /* Stepped underline decoration */
+    padding-bottom: 15px;
+}
+
+/* Decorative step-fret underline */
+.game-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 12px;
+    background: 
+        /* Central jade band */
+        linear-gradient(90deg, 
+            transparent 0%, 
+            var(--jade-light) 20%, 
+            var(--jade-glow) 50%, 
+            var(--jade-light) 80%, 
+            transparent 100%
+        ),
+        /* Step-fret overlay */
+        repeating-linear-gradient(90deg,
+            transparent 0px, transparent 8px,
+            var(--gold-sun) 8px, var(--gold-sun) 10px,
+            transparent 10px, transparent 18px,
+            var(--terracotta) 18px, var(--terracotta) 20px,
+            transparent 20px, transparent 28px
+        );
+    background-size: 100% 100%, 40px 100%;
+    clip-path: polygon(
+        0% 50%, 5% 0%, 15% 0%, 20% 50%, 25% 0%, 35% 0%, 40% 50%, 45% 0%, 55% 0%, 60% 50%, 65% 0%, 75% 0%, 80% 50%, 85% 0%, 95% 0%, 100% 50%,
+        95% 100%, 85% 100%, 80% 50%, 75% 100%, 65% 100%, 60% 50%, 55% 100%, 45% 100%, 40% 50%, 35% 100%, 25% 100%, 20% 50%, 15% 100%, 5% 100%
+    );
+}
+
+/* Decorative serpent heads flanking title */
+.game-title::before {
+    content: '🐍';
+    position: absolute;
+    left: -60px;
+    top: 50%;
+    transform: translateY(-50%) scaleX(-1);
+    font-size: 2rem;
+    opacity: 0.6;
+    filter: hue-rotate(60deg) saturate(1.5);
+}
+
+@keyframes titleGlow {
+    from { 
+        text-shadow: 
+            0 0 30px rgba(212, 168, 67, 0.6),
+            0 0 60px rgba(212, 168, 67, 0.3),
+            0 4px 0 var(--terracotta-dark),
+            0 8px 0 var(--cacao-brown),
+            0 12px 20px rgba(0,0,0,0.5);
+    }
+    to { 
+        text-shadow: 
+            0 0 50px rgba(212, 168, 67, 0.9),
+            0 0 100px rgba(212, 168, 67, 0.5),
+            0 4px 0 var(--terracotta-dark),
+            0 8px 0 var(--cacao-brown),
+            0 12px 20px rgba(0,0,0,0.5);
+    }
+}
+
+.subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--maya-blue);
+    margin-top: var(--spacing-md);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+}
+
+/* Quetzal emblem - now more stylized */
+/* Tecun Uman Hero Image with Mayan frame */
+.quetzal-emblem {
+    width: 260px;
+    height: 320px;
+    margin: var(--spacing-xs) auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 1;
+}
+
+/* Colorful Mayan frame around the image - disabled */
+.quetzal-emblem::before {
+    display: none;
+}
+
+/* Glowing sacred aura */
+.quetzal-emblem::after {
+    content: '';
+    position: absolute;
+    inset: -30px;
+    z-index: -1;
+    pointer-events: none;
+    animation: pulse-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes drift-clouds-slow {
+    0%, 100% { transform: translateX(0); opacity: 0.7; }
+    50% { transform: translateX(15px); opacity: 0.9; }
+}
+
+/* The actual Tecun Uman statue image - stationary and prominent */
+.quetzal-emblem .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 10px 40px rgba(0,0,0,0.6));
+    /* No animation - Tecun stands firm */
+}
+
+/* Hide old tail-feathers element */
+.quetzal-emblem .tail-feathers {
+    display: none;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse {
+    from { box-shadow: 0 0 40px rgba(212, 168, 67, 0.4), 0 8px 20px rgba(0,0,0,0.4); }
+    to { box-shadow: 0 0 60px rgba(212, 168, 67, 0.6), 0 8px 25px rgba(0,0,0,0.5); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.tagline {
+    font-size: 1.3rem;
+    color: var(--maize-yellow);
+    margin: var(--spacing-lg) 0;
+    font-style: italic;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* Stone Button Style - Mayan carved stone aesthetic */
+.stone-button {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: 
+        /* Colorful Mayan pattern overlay */
+        repeating-linear-gradient(90deg,
+            transparent 0px, transparent 3px,
+            rgba(212, 168, 67, 0.1) 3px, rgba(212, 168, 67, 0.1) 6px,
+            transparent 6px, transparent 12px
+        ),
+        /* Stone texture simulation */
+        linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%, rgba(0,0,0,0.15) 100%),
+        linear-gradient(180deg, var(--stone-light) 0%, var(--stone-dark) 100%);
+    border: 3px solid var(--gold-sun);
+    border-left-color: var(--terracotta);
+    border-right-color: var(--jade-light);
+    color: var(--cacao-brown);
+    cursor: pointer;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    box-shadow: 
+        0 4px 0 var(--terracotta-dark),
+        0 6px 12px rgba(0,0,0,0.4),
+        inset 0 2px 0 rgba(255,255,255,0.4);
+}
+
+/* Carved step-fret glyph decoration on buttons */
+.stone-button::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: 
+        linear-gradient(135deg, var(--terracotta) 25%, transparent 25%),
+        linear-gradient(225deg, var(--jade-light) 25%, transparent 25%),
+        linear-gradient(315deg, var(--gold-sun) 25%, transparent 25%),
+        linear-gradient(45deg, var(--maya-blue) 25%, transparent 25%);
+    background-size: 6px 6px;
+    background-position: 0 0, 6px 0, 6px 6px, 0 6px;
+    color: var(--gold-sun);
+    opacity: 0.7;
+}
+
+.stone-button::after {
+    content: '◆';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.6em;
+    color: var(--gold-sun);
+    opacity: 0.7;
+}
+
+.stone-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 7px 0 var(--stone-dark),
+        0 10px 25px rgba(212, 168, 67, 0.5),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    background: 
+        linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(0,0,0,0.1) 100%),
+        linear-gradient(180deg, var(--gold-bright) 0%, var(--gold-sun) 100%);
+}
+
+.stone-button:active {
+    transform: translateY(2px);
+    box-shadow: 
+        0 2px 0 var(--stone-dark),
+        0 3px 5px rgba(0,0,0,0.3);
+}
+
+.stone-button.small {
+    font-size: 0.9rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.stone-button.small::before,
+.stone-button.small::after {
+    display: none;
+}
+
+.stone-button.secondary {
+    background: 
+        linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%, rgba(0,0,0,0.1) 100%),
+        linear-gradient(180deg, #5a5a5a 0%, #3a3a3a 100%);
+    border-color: #777;
+    color: var(--parchment);
+    box-shadow: 
+        0 4px 0 #2a2a2a,
+        0 6px 10px rgba(0,0,0,0.3);
+}
+
+.stone-button.secondary::before,
+.stone-button.secondary::after {
+    color: #888;
+}
+
+.stone-button.danger {
+    background: 
+        linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(0,0,0,0.2) 100%),
+        linear-gradient(180deg, var(--terracotta) 0%, var(--terracotta-dark) 100%);
+    border-color: var(--gold-sun);
+    color: var(--parchment);
+    box-shadow: 
+        0 4px 0 #6a2a1b,
+        0 6px 10px rgba(0,0,0,0.3);
+}
+
+.stone-button.danger::before,
+.stone-button.danger::after {
+    color: var(--maize-yellow);
+}
+
+/* ========================================
+   MAP SCREEN - Jungle/Highland terrain aesthetic
+   ======================================== */
+
+#map-screen {
+    background: 
+        /* Jungle canopy gradient */
+        radial-gradient(ellipse at 50% 0%, rgba(34, 139, 34, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 0% 50%, rgba(26, 77, 62, 0.2) 0%, transparent 40%),
+        radial-gradient(ellipse at 100% 50%, rgba(26, 77, 62, 0.2) 0%, transparent 40%),
+        linear-gradient(180deg, var(--cacao-brown) 0%, var(--obsidian) 100%);
+}
+
+.map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: 
+        /* Stone lintel effect */
+        linear-gradient(180deg, 
+            var(--stone-dark) 0%, 
+            var(--stone-light) 5%,
+            var(--stone-dark) 10%,
+            rgba(26, 77, 62, 0.9) 10%, 
+            rgba(26, 77, 62, 0.6) 100%
+        );
+    border-bottom: 4px solid var(--gold-sun);
+    box-shadow: 
+        0 4px 20px rgba(0,0,0,0.5),
+        inset 0 -2px 0 rgba(0,0,0,0.3);
+    position: relative;
+}
+
+/* Decorative corner glyphs on header */
+.map-header::before {
+    content: '◈';
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold-sun);
+    font-size: 1.2rem;
+    opacity: 0.6;
+}
+
+.map-header::after {
+    content: '◈';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold-sun);
+    font-size: 1.2rem;
+    opacity: 0.6;
+}
+
+.player-stats {
+    display: flex;
+    gap: var(--spacing-lg);
+    padding-left: 30px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 1.1rem;
+    padding: 4px 12px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 4px;
+    border: 1px solid rgba(212, 168, 67, 0.3);
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.stat-label {
+    color: var(--stone-light);
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    font-family: var(--font-display);
+    color: var(--gold-bright);
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(212, 168, 67, 0.5);
+}
+
+.turn-info {
+    font-family: var(--font-display);
+    display: flex;
+    gap: var(--spacing-lg);
+    color: var(--parchment);
+    padding-right: 30px;
+}
+
+.map-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    /* Subtle vignette effect */
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+}
+
+.map-container:active {
+    cursor: grabbing;
+}
+
+#campaign-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Army Marker - More elaborate warrior representation */
+.army-marker {
+    position: absolute;
+    width: 70px;
+    height: 90px;
+    pointer-events: none;
+    z-index: 100;
+    transform: translate(-50%, -100%);
+    transition: left 0.8s ease-in-out, top 0.8s ease-in-out;
+}
+
+.army-sprite {
+    width: 55px;
+    height: 55px;
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15) 0%, transparent 40%),
+        radial-gradient(circle, var(--jade-glow) 0%, var(--jade-deep) 60%, var(--cacao-brown) 100%);
+    border: 4px solid var(--gold-sun);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 
+        0 0 20px rgba(63, 168, 120, 0.6),
+        0 6px 20px rgba(0,0,0,0.6),
+        inset 0 -10px 20px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: armyPulse 2s ease-in-out infinite, armyGlow 3s ease-in-out infinite alternate;
+}
+
+/* Decorative feather plume */
+.army-sprite::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 20px solid var(--jade-glow);
+    filter: drop-shadow(0 0 5px rgba(63, 168, 120, 0.5));
+}
+
+.army-sprite::after {
+    content: '⚔️';
+    font-size: 26px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.army-flag {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 40px;
+    background: var(--terracotta-dark);
+}
+
+.army-flag::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 4px;
+    width: 25px;
+    height: 18px;
+    background: linear-gradient(135deg, var(--jade-light) 50%, var(--jade-deep) 50%);
+    border: 2px solid var(--gold-sun);
+    animation: flagWave 1s ease-in-out infinite;
+}
+
+@keyframes armyPulse {
+    0%, 100% { 
+        box-shadow: 
+            0 0 20px rgba(63, 168, 120, 0.6),
+            0 6px 20px rgba(0,0,0,0.6),
+            inset 0 -10px 20px rgba(0,0,0,0.3); 
+    }
+    50% { 
+        box-shadow: 
+            0 0 35px rgba(63, 168, 120, 0.8),
+            0 6px 20px rgba(0,0,0,0.6),
+            inset 0 -10px 20px rgba(0,0,0,0.3);
+    }
+}
+
+@keyframes armyGlow {
+    from { border-color: var(--gold-sun); }
+    to { border-color: var(--gold-bright); }
+}
+
+@keyframes flagWave {
+    0%, 100% { transform: skewX(0deg); }
+    50% { transform: skewX(-5deg); }
+}
+
+/* Territory Panel - Stone tablet aesthetic */
+.territory-panel {
+    position: absolute;
+    right: var(--spacing-lg);
+    top: 50%;
+    transform: translateY(-50%);
+    background: 
+        /* Stone texture simulation */
+        linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%, rgba(0,0,0,0.1) 100%),
+        linear-gradient(180deg, rgba(61, 35, 20, 0.98) 0%, rgba(26, 26, 46, 0.98) 100%);
+    border: 3px solid var(--gold-sun);
+    padding: var(--spacing-lg);
+    min-width: 320px;
+    max-width: 360px;
+    clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+    z-index: 200;
+    animation: slideIn 0.3s ease-out;
+    box-shadow: 
+        0 0 40px rgba(0,0,0,0.6),
+        inset 0 0 30px rgba(0,0,0,0.3),
+        0 0 0 1px rgba(212, 168, 67, 0.3);
+}
+
+/* Decorative corner accent */
+.territory-panel::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    border-left: 2px solid var(--jade-light);
+    border-top: 2px solid var(--jade-light);
+    opacity: 0.5;
+}
+
+.territory-panel::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-right: 2px solid var(--jade-light);
+    border-bottom: 2px solid var(--jade-light);
+    opacity: 0.5;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50%) translateX(30px); opacity: 0; }
+    to { transform: translateY(-50%) translateX(0); opacity: 1; }
+}
+
+.territory-panel.hidden {
+    display: none;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(180deg, var(--terracotta) 0%, var(--terracotta-dark) 100%);
+    border: 2px solid var(--gold-sun);
+    color: var(--parchment);
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 0;
+    clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 0 var(--terracotta-dark);
+}
+
+.close-button:hover {
+    background: linear-gradient(180deg, var(--maya-red) 0%, var(--blood-red) 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 var(--terracotta-dark);
+}
+
+.close-button:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+.territory-panel h3 {
+    font-family: var(--font-display);
+    color: var(--gold-bright);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.4rem;
+    padding-right: 40px;
+    text-shadow: 0 0 15px rgba(212, 168, 67, 0.4);
+    border-bottom: 1px solid rgba(212, 168, 67, 0.3);
+    padding-bottom: var(--spacing-sm);
+}
+
+.territory-panel p {
+    color: var(--stone-light);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+}
+
+#territory-status {
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-radius: 0;
+    background: rgba(0,0,0,0.4);
+    border-left: 3px solid var(--gold-sun);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%);
+}
+
+.lesson-info {
+    background: 
+        linear-gradient(135deg, rgba(45, 125, 95, 0.15) 0%, rgba(45, 125, 95, 0.25) 100%);
+    border: 1px solid var(--jade-light);
+    border-left: 3px solid var(--jade-glow);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-radius: 0;
+    position: relative;
+}
+
+.lesson-info::before {
+    content: '📜';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    opacity: 0.5;
+}
+
+.lesson-info .lesson-type {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 1.1rem;
+    color: var(--jade-glow);
+}
+
+.lesson-info .lesson-desc {
+    font-size: 0.9rem;
+    color: var(--stone-light);
+    margin-top: var(--spacing-xs);
+}
+
+.territory-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+/* Attack Alert */
+.attack-alert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 300;
+    animation: alertPop 0.4s ease-out;
+}
+
+@keyframes alertPop {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    70% { transform: translate(-50%, -50%) scale(1.05); }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.attack-alert.hidden {
+    display: none;
+}
+
+.alert-content {
+    background: linear-gradient(180deg, rgba(139, 0, 0, 0.95) 0%, rgba(60, 0, 0, 0.95) 100%);
+    border: 3px solid var(--spanish-gold);
+    padding: var(--spacing-xl);
+    text-align: center;
+    min-width: 350px;
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+}
+
+.alert-content h3 {
+    font-family: var(--font-display);
+    color: var(--spanish-gold);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+    animation: alertFlash 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes alertFlash {
+    from { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+    to { text-shadow: 0 0 30px rgba(255, 215, 0, 0.9); }
+}
+
+.alert-content p {
+    color: var(--parchment);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.1rem;
+}
+
+.alert-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+}
+
+.map-legend {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: rgba(0,0,0,0.3);
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 0.9rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gold-sun);
+    border-radius: 50%;
+}
+
+.legend-color.kiche { background: var(--jade-deep); }
+.legend-color.spanish { background: var(--spanish-red); }
+.legend-color.contested { background: var(--terracotta); }
+.legend-color.fog { background: var(--fog-color); }
+
+.legend-army {
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, var(--jade-light) 0%, var(--jade-deep) 100%);
+    border: 2px solid var(--gold-sun);
+    border-radius: 50%;
+    position: relative;
+}
+
+.legend-army::after {
+    content: '⚔️';
+    font-size: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ========================================
+   BATTLE/LESSON SCREEN - Ceremonial arena aesthetic
+   ======================================== */
+
+#battle-screen {
+    background: 
+        /* Torch-lit atmosphere */
+        radial-gradient(ellipse at 10% 20%, rgba(212, 168, 67, 0.1) 0%, transparent 30%),
+        radial-gradient(ellipse at 90% 20%, rgba(212, 168, 67, 0.1) 0%, transparent 30%),
+        /* Blood/battle red glow at top */
+        radial-gradient(ellipse at 50% 0%, rgba(178, 34, 34, 0.25) 0%, transparent 40%),
+        /* Temple floor gradient */
+        linear-gradient(180deg, var(--cacao-brown) 0%, var(--obsidian) 40%, var(--obsidian-light) 100%);
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Stone border at top */
+#battle-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: 
+        repeating-linear-gradient(90deg,
+            var(--stone-dark) 0px,
+            var(--stone-dark) 20px,
+            var(--gold-sun) 20px,
+            var(--gold-sun) 22px
+        );
+}
+
+.battle-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    padding-top: calc(var(--spacing-lg) + 8px);
+    background: 
+        linear-gradient(180deg, rgba(61, 35, 20, 0.6) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    position: relative;
+}
+
+.army-display {
+    text-align: center;
+    padding: var(--spacing-md);
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    border: 1px solid rgba(212, 168, 67, 0.2);
+    position: relative;
+}
+
+/* Shield emblem behind army display */
+.army-display::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    opacity: 0.1;
+}
+
+.kiche-army::before {
+    background: radial-gradient(circle, var(--jade-glow) 0%, transparent 70%);
+}
+
+.spanish-army::before {
+    background: radial-gradient(circle, var(--spanish-red) 0%, transparent 70%);
+}
+
+.army-display h3 {
+    font-family: var(--font-display);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.kiche-army h3 { 
+    color: var(--jade-glow); 
+    text-shadow: 0 0 10px rgba(63, 168, 120, 0.5);
+}
+.spanish-army h3 { 
+    color: var(--spanish-red); 
+    text-shadow: 0 0 10px rgba(196, 30, 58, 0.5);
+}
+
+.army-visual {
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem;
+    gap: 4px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+}
+
+.army-health {
+    margin-top: var(--spacing-sm);
+}
+
+.health-bar {
+    height: 18px;
+    background: 
+        linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+    border: 2px solid var(--jade-light);
+    border-radius: 0;
+    overflow: hidden;
+    margin-bottom: var(--spacing-xs);
+    clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.health-bar.enemy {
+    border-color: var(--spanish-red);
+}
+
+.health-fill {
+    height: 100%;
+    width: 100%;
+    background: 
+        linear-gradient(180deg, var(--jade-glow) 0%, var(--jade-deep) 100%);
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+/* Shine effect on health bar */
+.health-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+}
+
+.health-bar.enemy .health-fill {
+    background: 
+        linear-gradient(180deg, var(--spanish-red) 0%, var(--blood-red) 100%);
+}
+
+.battle-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lesson-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: 
+        linear-gradient(135deg, rgba(45, 125, 95, 0.4) 0%, rgba(45, 125, 95, 0.2) 100%);
+    border: 2px solid var(--jade-light);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: 0;
+    margin-bottom: var(--spacing-sm);
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+    box-shadow: 0 2px 10px rgba(45, 125, 95, 0.3);
+}
+
+.lesson-badge .lesson-icon {
+    font-size: 1.3rem;
+}
+
+.lesson-badge .lesson-name {
+    font-family: var(--font-display);
+    color: var(--jade-glow);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.battle-info h2 {
+    font-family: var(--font-display);
+    color: var(--gold-bright);
+    font-size: 1.6rem;
+    text-shadow: 
+        0 0 20px rgba(212, 168, 67, 0.5),
+        0 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 0.05em;
+}
+
+.round-counter {
+    font-size: 1.1rem;
+    color: var(--maize-yellow);
+    margin-top: var(--spacing-sm);
+    opacity: 0.9;
+}
+
+/* Lesson Area - Sacred learning space */
+.lesson-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    padding-bottom: calc(var(--spacing-xl) * 2);
+    max-width: 750px;
+    margin: 0 auto;
+    position: relative;
+    min-height: min-content;
+}
+
+/* Decorative side glyphs - pointer-events: none to not block clicks */
+.lesson-area::before {
+    content: '◇ ◆ ◇';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    color: var(--gold-sun);
+    opacity: 0.1;
+    font-size: 1.5rem;
+    letter-spacing: 1em;
+    pointer-events: none;
+}
+
+.lesson-area::after {
+    content: '◇ ◆ ◇';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    color: var(--gold-sun);
+    opacity: 0.1;
+    font-size: 1.5rem;
+    letter-spacing: 1em;
+    pointer-events: none;
+}
+
+/* Lesson Prompt - Ceremonial stone tablet */
+.lesson-prompt {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: 
+        linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%, rgba(0,0,0,0.1) 100%),
+        linear-gradient(180deg, rgba(61, 35, 20, 0.5) 0%, rgba(26, 26, 46, 0.5) 100%);
+    border: 2px solid rgba(212, 168, 67, 0.4);
+    clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px), 0 15px);
+    position: relative;
+    box-shadow: 
+        0 0 30px rgba(0,0,0,0.3),
+        inset 0 0 20px rgba(0,0,0,0.2);
+}
+
+/* Decorative corner markers */
+.lesson-prompt::before {
+    content: '◈';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold-sun);
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+.instruction {
+    font-size: 1.2rem;
+    color: var(--maize-yellow);
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+.word-display {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 7vw, 4rem);
+    color: var(--gold-bright);
+    text-shadow: 
+        0 0 30px rgba(212, 168, 67, 0.5),
+        0 0 60px rgba(212, 168, 67, 0.2),
+        0 4px 8px rgba(0,0,0,0.5);
+    padding: var(--spacing-sm) 0;
+}
+
+/* K'iche' conversation prompt styling */
+.word-display .kiche-prompt {
+    display: block;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--jade-glow);
+}
+
+.word-display .prompt-translation {
+    display: block;
+    font-size: 1rem;
+    color: var(--stone-light);
+    font-family: var(--font-body);
+    font-style: italic;
+    margin-top: var(--spacing-xs);
+    opacity: 0.8;
+}
+
+/* Recall question - large icon display */
+.word-display .recall-icon {
+    display: block;
+    font-size: 5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.word-display .recall-hint {
+    display: block;
+    font-size: 1rem;
+    color: var(--stone-light);
+    font-family: var(--font-body);
+    font-style: italic;
+    opacity: 0.7;
+}
+
+#lesson-input-area {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: var(--spacing-lg);
+    overflow: visible;
+}
+
+/* Answer Input - Carved inscription style */
+.answer-input {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-family: var(--font-body);
+    font-size: 1.6rem;
+    text-align: center;
+    background: 
+        linear-gradient(180deg, rgba(244, 228, 188, 0.08) 0%, rgba(244, 228, 188, 0.12) 100%);
+    border: 3px solid var(--jade-light);
+    border-radius: 0;
+    color: var(--parchment);
+    transition: all 0.3s ease;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+    box-shadow: 
+        inset 0 2px 10px rgba(0,0,0,0.3),
+        0 4px 0 rgba(45, 125, 95, 0.3);
+}
+
+.answer-input::placeholder {
+    color: rgba(244, 228, 188, 0.4);
+    font-style: italic;
+}
+
+.answer-input:focus {
+    outline: none;
+    border-color: var(--gold-sun);
+    background: rgba(244, 228, 188, 0.15);
+    box-shadow: 0 0 20px rgba(212, 168, 67, 0.2);
+}
+
+.answer-input::placeholder {
+    color: rgba(244, 228, 188, 0.4);
+}
+
+.choices-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    width: 100%;
+    max-width: 100%;
+}
+
+.choices-container.hidden {
+    display: none;
+}
+
+/* Icon-based choices (larger buttons with emojis) */
+.choices-container.icon-choices {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.choices-container.icon-choices .choice-btn {
+    font-size: 2rem;
+    padding: var(--spacing-md);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0; /* Allow shrinking */
+    overflow: hidden;
+}
+
+/* Icon + text choices (icon with label below) */
+.choices-container.icon-text-choices {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.choices-container.icon-text-choices .choice-btn {
+    font-size: 1.1rem;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--spacing-sm);
+    text-align: left;
+}
+
+/* Phrase selection choices (full-width K'iche' phrases) */
+.choices-container.phrase-choices {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+}
+
+.choices-container.phrase-choices .choice-btn {
+    font-size: 1.2rem;
+    font-family: var(--font-body);
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+    background: rgba(61, 35, 20, 0.4);
+    border: 2px solid var(--gold-sun);
+}
+
+.choices-container.phrase-choices .choice-btn:hover {
+    background: rgba(212, 168, 67, 0.2);
+    transform: translateX(5px);
+}
+
+.choice-btn {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    background: rgba(45, 125, 95, 0.2);
+    border: 2px solid var(--jade-light);
+    color: var(--parchment);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.choice-btn:hover {
+    background: rgba(45, 125, 95, 0.4);
+    transform: translateY(-2px);
+}
+
+.choice-btn.correct {
+    background: var(--jade-light);
+    border-color: var(--gold-sun);
+    animation: correctPulse 0.5s ease;
+}
+
+.choice-btn.incorrect {
+    background: var(--blood-red);
+    border-color: var(--terracotta);
+    animation: shake 0.5s ease;
+}
+
+@keyframes correctPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.lesson-feedback {
+    text-align: center;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-radius: 8px;
+    animation: fadeIn 0.3s ease;
+    width: 100%;
+}
+
+.lesson-feedback.hidden {
+    display: none;
+}
+
+.lesson-feedback.correct {
+    background: rgba(45, 125, 95, 0.3);
+    border: 2px solid var(--jade-light);
+}
+
+.lesson-feedback.incorrect {
+    background: rgba(139, 0, 0, 0.3);
+    border: 2px solid var(--blood-red);
+}
+
+#feedback-text {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: var(--spacing-sm);
+}
+
+.lesson-feedback.correct #feedback-text { color: var(--jade-light); }
+.lesson-feedback.incorrect #feedback-text { color: var(--terracotta); }
+
+#correct-answer {
+    color: var(--stone-light);
+}
+
+.feedback-explanation {
+    font-size: 0.95rem;
+    color: var(--parchment);
+    margin-top: var(--spacing-sm);
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.cultural-note {
+    background: rgba(212, 168, 67, 0.15);
+    border-left: 3px solid var(--gold-sun);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-top: var(--spacing-md);
+    text-align: left;
+    font-size: 0.9rem;
+    color: var(--parchment);
+    line-height: 1.5;
+}
+
+.cultural-note-label {
+    color: var(--gold-sun);
+    font-weight: bold;
+    display: block;
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Response meaning for conversation questions */
+.response-meaning {
+    display: block;
+    font-style: italic;
+    color: var(--jade-light);
+    font-size: 0.95rem;
+    margin-top: var(--spacing-xs);
+}
+
+/* Progress Dots */
+.battle-progress {
+    padding: var(--spacing-lg);
+    display: flex;
+    justify-content: center;
+}
+
+.progress-dots {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    border: 2px solid var(--stone-dark);
+    transition: all 0.3s ease;
+}
+
+.dot.correct {
+    background: var(--jade-light);
+    border-color: var(--jade-light);
+    box-shadow: 0 0 10px var(--jade-light);
+}
+
+.dot.incorrect {
+    background: var(--blood-red);
+    border-color: var(--blood-red);
+    box-shadow: 0 0 10px var(--blood-red);
+}
+
+.dot.current {
+    border-color: var(--gold-sun);
+    animation: currentPulse 1s ease-in-out infinite;
+}
+
+@keyframes currentPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(212, 168, 67, 0); }
+}
+
+/* ========================================
+   TUTORIAL SCREEN
+   ======================================== */
+
+#tutorial-screen {
+    background: 
+        radial-gradient(ellipse at top, rgba(26, 77, 62, 0.4) 0%, transparent 50%),
+        linear-gradient(180deg, var(--obsidian) 0%, var(--obsidian-light) 100%);
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+}
+
+.tutorial-container {
+    max-width: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.tutorial-header {
+    text-align: center;
+    width: 100%;
+}
+
+.tutorial-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    filter: drop-shadow(0 0 10px var(--jade-glow));
+}
+
+#tutorial-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--gold-sun);
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.tutorial-location {
+    color: var(--jade-light);
+    font-style: italic;
+    margin: var(--spacing-xs) 0 0;
+}
+
+.tutorial-content {
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* Individual tutorial card */
+.tutorial-card {
+    background: linear-gradient(135deg, rgba(26, 77, 62, 0.3) 0%, rgba(20, 20, 20, 0.6) 100%);
+    border: 2px solid var(--jade-deep);
+    border-radius: 12px;
+    padding: var(--spacing-lg);
+    animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tutorial-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--jade-deep);
+}
+
+.tutorial-word-icon {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--jade-deep), var(--jade-light));
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.tutorial-word-main {
+    flex: 1;
+}
+
+.tutorial-kiche {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--gold-sun);
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.tutorial-english {
+    color: var(--parchment);
+    font-size: 1.1rem;
+    margin: var(--spacing-xs) 0 0;
+}
+
+.tutorial-spanish {
+    color: var(--stone-light);
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+.tutorial-card-body {
+    color: var(--parchment);
+    line-height: 1.6;
+}
+
+.tutorial-culture {
+    background: rgba(212, 168, 67, 0.1);
+    border-left: 3px solid var(--gold-sun);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-top: var(--spacing-sm);
+    border-radius: 0 8px 8px 0;
+}
+
+.tutorial-culture-label {
+    color: var(--gold-sun);
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.tutorial-culture p {
+    margin: 0;
+    color: var(--maize-yellow);
+    font-size: 0.95rem;
+}
+
+/* Conjugation/extra info */
+.tutorial-extra {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.tutorial-extra-item {
+    background: rgba(255,255,255,0.05);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.tutorial-extra-label {
+    color: var(--jade-light);
+    font-weight: bold;
+}
+
+.tutorial-extra-value {
+    color: var(--parchment);
+}
+
+/* Navigation */
+.tutorial-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: var(--spacing-md);
+}
+
+.tutorial-progress {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--jade-light);
+}
+
+#tutorial-prev:disabled,
+#tutorial-next:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+#start-quiz {
+    margin-top: var(--spacing-md);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+#start-quiz.hidden {
+    display: none;
+}
+
+/* ========================================
+   RESULT SCREEN
+   ======================================== */
+
+#result-screen {
+    background: 
+        radial-gradient(ellipse at center, rgba(26, 77, 62, 0.3) 0%, transparent 60%),
+        var(--obsidian);
+    justify-content: center;
+    align-items: center;
+}
+
+.result-content {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: linear-gradient(180deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
+    border: 3px solid var(--gold-sun);
+    max-width: 500px;
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+}
+
+#result-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+#result-title.victory { color: var(--jade-light); }
+#result-title.defeat { color: var(--blood-red); }
+#result-title.draw { color: var(--gold-sun); }
+
+.result-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-md);
+}
+
+#result-message {
+    font-size: 1.1rem;
+    color: var(--stone-light);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.6;
+}
+
+.result-stats {
+    background: rgba(0,0,0,0.3);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    text-align: left;
+}
+
+.result-stat {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.result-stat:last-child {
+    border-bottom: none;
+}
+
+.result-stat .label {
+    color: var(--stone-light);
+}
+
+.result-stat .value {
+    font-family: var(--font-display);
+    color: var(--gold-sun);
+}
+
+/* ========================================
+   GAME OVER SCREEN
+   ======================================== */
+
+#gameover-screen {
+    background: 
+        radial-gradient(ellipse at center, rgba(139, 0, 0, 0.3) 0%, transparent 60%),
+        var(--obsidian);
+    justify-content: center;
+    align-items: center;
+}
+
+.gameover-content {
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+#gameover-title {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+#gameover-title.victory {
+    color: var(--gold-sun);
+    text-shadow: 0 0 30px rgba(212, 168, 67, 0.5);
+}
+
+#gameover-title.defeat {
+    color: var(--blood-red);
+}
+
+#gameover-message {
+    font-size: 1.2rem;
+    color: var(--stone-light);
+    margin-bottom: var(--spacing-xl);
+    max-width: 500px;
+    line-height: 1.8;
+}
+
+.final-stats {
+    background: rgba(0,0,0,0.4);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    border: 2px solid var(--gold-sun);
+}
+
+.final-stats p {
+    padding: var(--spacing-sm) 0;
+    font-size: 1.1rem;
+}
+
+.final-stats span {
+    font-family: var(--font-display);
+    color: var(--gold-sun);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .map-header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .player-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .battle-header {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .battle-info {
+        order: -1;
+    }
+    
+    .territory-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        transform: none;
+        clip-path: none;
+        max-width: 100%;
+    }
+    
+    .choices-container {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .choices-container.icon-choices {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .choices-container.icon-choices .choice-btn {
+        font-size: 1.8rem;
+    }
+    
+    .map-legend {
+        gap: var(--spacing-sm);
+    }
+}
+
+/* ========================================
+   TITLE SCREEN OPTIONS
+   ======================================== */
+
+.title-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.title-options {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Panel Difficulty Selector (in territory panel) */
+.panel-difficulty-selector {
+    margin-top: var(--spacing-sm);
+}
+
+.panel-diff-label {
+    font-size: 0.8rem;
+    color: var(--stone-light);
+    margin-bottom: var(--spacing-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.panel-action-label {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-sm);
+    font-weight: bold;
+}
+
+.panel-diff-buttons {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.panel-diff-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-sm);
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--stone-dark);
+    color: var(--stone-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+.panel-diff-btn:hover {
+    background: var(--jade-deep);
+    border-color: var(--gold-sun);
+    color: var(--parchment);
+    transform: translateY(-2px);
+}
+
+.panel-diff-btn .diff-icon {
+    font-size: 1.3rem;
+}
+
+.panel-diff-btn .diff-name {
+    font-size: 0.7rem;
+    font-family: var(--font-display);
+    margin-top: 2px;
+}
+
+.language-switcher {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+}
+
+.lang-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--stone-dark);
+    color: var(--stone-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.lang-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--gold-sun);
+}
+
+.lang-btn.active {
+    background: var(--jade-deep);
+    border-color: var(--jade-light);
+    color: var(--parchment);
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--stone-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.github-link:hover {
+    opacity: 1;
+    color: var(--parchment);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.github-link svg {
+    flex-shrink: 0;
+}
+
+/* ========================================
+   HEADER RIGHT SECTION
+   ======================================== */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.icon-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--gold-sun);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.icon-button:hover {
+    background: var(--jade-deep);
+    transform: scale(1.1);
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: var(--spacing-sm); }
+.mt-2 { margin-top: var(--spacing-md); }
+.mt-3 { margin-top: var(--spacing-lg); }

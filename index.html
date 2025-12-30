@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecun Uman - Defend the K'iche' Kingdom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Almendra:wght@400;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/tecunuman/assets/index-vapc6OPy.js"></script>
+  <link rel="stylesheet" crossorigin href="/tecunuman/assets/index-CmMteMj8.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Title Screen -->
+        <div id="title-screen" class="screen active">
+            <div class="title-content">
+                <div class="glyph-border top"></div>
+                <h1 class="game-title">TECUN UMAN</h1>
+                <p class="subtitle" data-i18n="subtitle">Defender of the K'iche' Kingdom</p>
+                <div class="quetzal-emblem">
+                    <img src="/tecunuman/assets/warrior-CmQi9_YL.png" alt="Tecun Uman" class="hero-image">
+                </div>
+                <p class="tagline" data-i18n="tagline">Learn K'iche'. Defend Your People. Change History.</p>
+                
+                <div class="title-buttons">
+                    <button id="start-game" class="stone-button" data-i18n="startGame">Begin Campaign</button>
+                    <button id="continue-game" class="stone-button secondary hidden" data-i18n="continueGame">Continue Campaign</button>
+                </div>
+                
+                <div class="title-options">
+                    <!-- Language Switcher -->
+                    <div class="language-switcher">
+                        <button id="lang-en" class="lang-btn active">English</button>
+                        <button id="lang-es" class="lang-btn">Español</button>
+                    </div>
+                </div>
+                
+                <div class="glyph-border bottom"></div>
+                
+                <a href="https://github.com/danbednarski/tecunuman" target="_blank" class="github-link">
+                    <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    <span data-i18n="sourceCode">Source Code</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Campaign Map Screen -->
+        <div id="map-screen" class="screen">
+            <div class="map-header">
+                <div class="player-stats">
+                    <div class="stat">
+                        <span class="stat-icon">⚔️</span>
+                        <span class="stat-label" data-i18n="army">Army:</span>
+                        <span id="army-count" class="stat-value">1000</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon">🛡️</span>
+                        <span class="stat-label" data-i18n="morale">Morale:</span>
+                        <span id="morale" class="stat-value">100%</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon">📚</span>
+                        <span class="stat-label" data-i18n="mastery">K'iche' Mastery:</span>
+                        <span id="mastery" class="stat-value">0%</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="turn-info">
+                        <span><span data-i18n="turn">Turn</span>: <span id="turn-number">1</span></span>
+                        <span><span data-i18n="year">Year</span>: <span id="year">1524</span></span>
+                    </div>
+                    <button id="save-quit" class="icon-button" title="Save & Quit">💾</button>
+                </div>
+            </div>
+            
+            <div class="map-container" id="map-container">
+                <canvas id="campaign-map"></canvas>
+                
+                <!-- Army indicator -->
+                <div id="army-marker" class="army-marker">
+                    <div class="army-sprite"></div>
+                    <div class="army-flag"></div>
+                </div>
+                
+                <!-- Territory info panel -->
+                <div id="territory-info" class="territory-panel hidden">
+                    <button id="close-panel" class="close-button">✕</button>
+                    <h3 id="territory-name"></h3>
+                    <p id="territory-desc"></p>
+                    <div id="territory-status"></div>
+                    <div id="lesson-info" class="lesson-info"></div>
+                    <div class="territory-actions" id="territory-actions">
+                        <!-- Buttons added dynamically -->
+                    </div>
+                </div>
+                
+                <!-- Alert for Spanish attacks -->
+                <div id="attack-alert" class="attack-alert hidden">
+                    <div class="alert-content">
+                        <h3>⚠️ <span data-i18n="spanishAttack">Spanish Attack!</span></h3>
+                        <p id="alert-message"></p>
+                        <div class="alert-buttons">
+                            <button id="btn-rush-defend" class="stone-button small" data-i18n="rushDefend">Rush to Defend</button>
+                            <button id="btn-ignore-attack" class="stone-button small secondary" data-i18n="continueForward">Continue Forward</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-legend">
+                <div class="legend-item"><span class="legend-color kiche"></span> <span data-i18n="kicheTerritory">K'iche' Territory</span></div>
+                <div class="legend-item"><span class="legend-color spanish"></span> <span data-i18n="spanishControlled">Spanish Controlled</span></div>
+                <div class="legend-item"><span class="legend-color contested"></span> <span data-i18n="underAttack">Under Attack</span></div>
+                <div class="legend-item"><span class="legend-color fog"></span> <span data-i18n="unexplored">Unexplored</span></div>
+                <div class="legend-item"><span class="legend-army"></span> <span data-i18n="yourArmy">Your Army</span></div>
+            </div>
+        </div>
+
+        <!-- Battle/Lesson Screen -->
+        <div id="battle-screen" class="screen">
+            <div class="battle-header">
+                <div class="army-display kiche-army">
+                    <h3 data-i18n="kicheWarriors">K'iche' Warriors</h3>
+                    <div class="army-visual" id="kiche-warriors"></div>
+                    <div class="army-health">
+                        <div class="health-bar">
+                            <div id="kiche-health-fill" class="health-fill"></div>
+                        </div>
+                        <span id="kiche-troops">1000</span> <span data-i18n="warriors">warriors</span>
+                    </div>
+                </div>
+                <div class="battle-info">
+                    <div class="lesson-badge" id="lesson-badge">
+                        <span class="lesson-icon">📚</span>
+                        <span class="lesson-name">Vocabulary</span>
+                    </div>
+                    <h2 id="battle-title">Battle for Q'umarkaj</h2>
+                    <div class="round-counter"><span data-i18n="round">Round</span> <span id="round-number">1</span>/5</div>
+                </div>
+                <div class="army-display spanish-army">
+                    <h3 data-i18n="spanishForces">Spanish Forces</h3>
+                    <div class="army-visual" id="spanish-forces"></div>
+                    <div class="army-health">
+                        <div class="health-bar enemy">
+                            <div id="spanish-health-fill" class="health-fill"></div>
+                        </div>
+                        <span id="spanish-troops">500</span> <span data-i18n="soldiers">soldiers</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-area">
+                <div class="lesson-prompt">
+                    <p class="instruction" id="lesson-instruction">Translate this word to K'iche':</p>
+                    <p class="word-display" id="word-to-translate">Water</p>
+                </div>
+                
+                <div id="lesson-input-area">
+                    <!-- For typing exercises -->
+                    <input type="text" id="answer-input" class="answer-input" data-i18n-placeholder="typeAnswer" placeholder="Type your answer..." autocomplete="off">
+                    
+                    <!-- For multiple choice -->
+                    <div id="choices-container" class="choices-container hidden">
+                        <button class="choice-btn"></button>
+                        <button class="choice-btn"></button>
+                        <button class="choice-btn"></button>
+                        <button class="choice-btn"></button>
+                    </div>
+                </div>
+
+                <div class="lesson-feedback hidden" id="feedback">
+                    <p id="feedback-text"></p>
+                    <p id="correct-answer"></p>
+                    <p id="feedback-explanation" class="feedback-explanation"></p>
+                </div>
+
+                <button id="submit-answer" class="stone-button" data-i18n="submitAnswer">Submit Answer</button>
+                <button id="next-question" class="stone-button hidden" data-i18n="nextChallenge">Next Challenge</button>
+            </div>
+
+            <div class="battle-progress">
+                <div class="progress-dots" id="progress-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tutorial/Lesson Screen -->
+        <div id="tutorial-screen" class="screen">
+            <div class="tutorial-container">
+                <div class="tutorial-header">
+                    <span class="tutorial-icon" id="tutorial-icon">📚</span>
+                    <h2 id="tutorial-title">Learning: Vocabulary</h2>
+                    <p class="tutorial-location" id="tutorial-location">Q'umarkaj</p>
+                </div>
+                
+                <div class="tutorial-content" id="tutorial-content">
+                    <!-- Tutorial cards will be inserted here -->
+                </div>
+                
+                <div class="tutorial-navigation">
+                    <button id="tutorial-prev" class="stone-button secondary" disabled>
+                        <span>←</span> <span data-i18n="previous">Previous</span>
+                    </button>
+                    <div class="tutorial-progress">
+                        <span id="tutorial-current">1</span> / <span id="tutorial-total">6</span>
+                    </div>
+                    <button id="tutorial-next" class="stone-button">
+                        <span data-i18n="next">Next</span> <span>→</span>
+                    </button>
+                </div>
+                
+                <button id="start-quiz" class="stone-button large hidden" data-i18n="beginQuiz">Begin Quiz!</button>
+            </div>
+        </div>
+
+        <!-- Battle Result Screen -->
+        <div id="result-screen" class="screen">
+            <div class="result-content">
+                <h2 id="result-title">Victory!</h2>
+                <div id="result-icon" class="result-icon"></div>
+                <p id="result-message"></p>
+                <div class="result-stats">
+                    <div class="result-stat">
+                        <span class="label" data-i18n="questionsCorrect">Questions Correct:</span>
+                        <span id="correct-count" class="value">0/5</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="label" data-i18n="territoryStatus">Territory Status:</span>
+                        <span id="territory-result" class="value"></span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="label" data-i18n="armyChange">Army Change:</span>
+                        <span id="army-change" class="value"></span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="label" data-i18n="wordsLearned">Words Learned:</span>
+                        <span id="words-learned" class="value">0</span>
+                    </div>
+                </div>
+                <button id="continue-campaign" class="stone-button" data-i18n="continueCampaign">Continue Campaign</button>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameover-screen" class="screen">
+            <div class="gameover-content">
+                <h2 id="gameover-title"></h2>
+                <p id="gameover-message"></p>
+                <div class="final-stats">
+                    <p><span data-i18n="turnsSurvived">Turns Survived</span>: <span id="final-turns">0</span></p>
+                    <p><span data-i18n="wordsMastered">K'iche' Words Mastered</span>: <span id="final-words">0</span></p>
+                    <p><span data-i18n="battlesWon">Battles Won</span>: <span id="final-battles">0</span></p>
+                </div>
+                <button id="restart-game" class="stone-button" data-i18n="tryAgain">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+        Script loading order for TypeScript migration:
+        1. main.ts (ES module) - sets up i18n, vocabulary, lessons on window object
+        2. game.js - uses globals from main.ts, must wait for module to complete
+        
+        Since ES modules are always deferred and execute in order, we dynamically 
+        load game.js from main.ts after the globals are set up.
+    -->
+</body>
+</html>
