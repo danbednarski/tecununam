@@ -2291,7 +2291,7 @@ function selectNode(node) {
     lessonInfo.innerHTML = `
             <div class="lesson-type">
                 <span>${lesson.icon || "📚"}</span>
-                <span>${lesson.englishName}</span>
+                <span>${lesson.name}</span>
             </div>
             <div class="lesson-desc">${lesson.description}</div>
         `;
@@ -2570,9 +2570,9 @@ function showTutorial(node, battleType) {
     DEBUG.log("Tutorial started for:", node.name, "- Press S to skip");
   }
   document.getElementById("tutorial-icon").textContent = (lesson == null ? void 0 : lesson.icon) || "📚";
-  document.getElementById("tutorial-title").textContent = `${t("learning")}: ${(lesson == null ? void 0 : lesson.englishName) || "Vocabulary"}`;
+  document.getElementById("tutorial-title").textContent = `${t("learning")}: ${(lesson == null ? void 0 : lesson.name) || "Vocabulary"}`;
   document.getElementById("tutorial-location").textContent = node.name;
-  document.getElementById("tutorial-total").textContent = tutorialState.items.length;
+  document.getElementById("tutorial-total").textContent = String(tutorialState.items.length);
   renderTutorialCard();
   updateTutorialNavigation();
   showScreen("tutorial");
@@ -2623,7 +2623,7 @@ function renderTutorialCard() {
             </div>
         </div>
     `;
-  document.getElementById("tutorial-current").textContent = tutorialState.currentIndex + 1;
+  document.getElementById("tutorial-current").textContent = String(tutorialState.currentIndex + 1);
 }
 function updateTutorialNavigation() {
   const prevBtn = document.getElementById("tutorial-prev");
@@ -2695,7 +2695,7 @@ function startBattleQuiz(node, type) {
   if (lesson) {
     document.getElementById("lesson-badge").innerHTML = `
             <span class="lesson-icon">${lesson.icon || "📚"}</span>
-            <span class="lesson-name">${lesson.englishName}</span>
+            <span class="lesson-name">${lesson.name}</span>
         `;
   }
   const dotsContainer = document.getElementById("progress-dots");
@@ -2927,7 +2927,7 @@ function endBattle() {
   if (battle.type === "train") {
     result.title = t("trainingComplete");
     result.icon = "📚";
-    result.message = `${t("studiedLesson")} ${((_a = LESSONS[node.lessonType]) == null ? void 0 : _a.englishName) || "K'iche'"}.`;
+    result.message = `${t("studiedLesson")} ${((_a = LESSONS[node.lessonType]) == null ? void 0 : _a.name) || "K'iche'"}.`;
     if (correctRatio >= 0.6) {
       result.message += ` (${t(difficulty)} ${t("level")} ✓)`;
     }
