@@ -21,3 +21,6 @@ npm-debug.log*
 # Cache
 .cache/
 
+# Unused/archived assets
+unused-assets/
+
