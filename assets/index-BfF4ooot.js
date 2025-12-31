@@ -2712,13 +2712,13 @@ function startBattleQuiz(node, type) {
 }
 function updateBattleUI() {
   const battle = GameState.currentBattle;
-  document.getElementById("kiche-troops").textContent = GameState.army;
+  document.getElementById("kiche-troops").textContent = String(GameState.army);
   document.getElementById("spanish-troops").textContent = battle.enemyStrength;
   const kichePercent = GameState.army / battle.startingArmy * 100;
   const spanishPercent = battle.startingEnemyStrength > 0 ? battle.enemyStrength / battle.startingEnemyStrength * 100 : 100;
   document.getElementById("kiche-health-fill").style.width = `${Math.max(0, kichePercent)}%`;
   document.getElementById("spanish-health-fill").style.width = `${Math.max(0, spanishPercent)}%`;
-  document.getElementById("round-number").textContent = GameState.currentQuestionIndex + 1;
+  document.getElementById("round-number").textContent = String(GameState.currentQuestionIndex + 1);
   const dots = document.querySelectorAll("#progress-dots .dot");
   dots.forEach((dot, i) => {
     dot.classList.remove("correct", "incorrect", "current");
@@ -2996,8 +2996,8 @@ function endBattle() {
   document.getElementById("result-message").textContent = result.message;
   document.getElementById("correct-count").textContent = `${GameState.correctAnswers}/${totalQuestions}`;
   document.getElementById("territory-result").textContent = result.territoryChange;
-  document.getElementById("army-change").textContent = result.armyChange >= 0 ? `+${result.armyChange}` : result.armyChange;
-  document.getElementById("words-learned").textContent = GameState.wordsLearned.size;
+  document.getElementById("army-change").textContent = String(result.armyChange >= 0 ? `+${result.armyChange}` : result.armyChange);
+  document.getElementById("words-learned").textContent = String(GameState.wordsLearned.size);
   autoSave();
   showScreen("result");
 }
@@ -3118,9 +3118,9 @@ function showGameOver(victory) {
     messageEl.textContent = t("defeatMessage");
   }
   deleteSave();
-  document.getElementById("final-turns").textContent = GameState.turn;
-  document.getElementById("final-words").textContent = GameState.wordsLearned.size;
-  document.getElementById("final-battles").textContent = GameState.battlesWon;
+  document.getElementById("final-turns").textContent = String(GameState.turn);
+  document.getElementById("final-words").textContent = String(GameState.wordsLearned.size);
+  document.getElementById("final-battles").textContent = String(GameState.battlesWon);
   showScreen("gameover");
 }
 function showScreen(screenName) {
@@ -3141,11 +3141,11 @@ function showScreen(screenName) {
   }
 }
 function updateStats() {
-  document.getElementById("army-count").textContent = GameState.army;
+  document.getElementById("army-count").textContent = String(GameState.army);
   document.getElementById("morale").textContent = `${GameState.morale}%`;
   document.getElementById("mastery").textContent = `${GameState.mastery}%`;
-  document.getElementById("turn-number").textContent = GameState.turn;
-  document.getElementById("year").textContent = GameState.year;
+  document.getElementById("turn-number").textContent = String(GameState.turn);
+  document.getElementById("year").textContent = String(GameState.year);
 }
 function startGame() {
   DEBUG.log("startGame called");
