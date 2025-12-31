@@ -6,33 +6,48 @@
 // ========================================
 
 // ========================================
+// TYPE IMPORTS
+// ========================================
+import type {
+    DifficultyLevel,
+    Language,
+    Lesson,
+    LessonContent,
+    Question,
+    VocabularyItem,
+    MapNode,
+    BattleState,
+} from './src/types/index';
+
+
+// ========================================
 // TYPE DECLARATIONS FOR GLOBALS
 // (Set by main.ts before this script loads)
 // ========================================
 declare const t: (key: string) => string;
 declare const initI18n: () => void;
-declare const LESSONS: any;
-declare const getDifficulty: () => string;
-declare const setDifficulty: (difficulty: string) => void;
-declare const generateLessonQuestions: (lessonId: string, count: number, learnedWords: any[]) => any[];
-declare const checkLessonAnswer: (userAnswer: string, question: any) => boolean;
-declare const getCurrentLanguage: () => string;
-declare const CULTURAL_VOCABULARY: any;
-declare const VOCABULARY_ANIMALS: any;
-declare const VOCABULARY_WARFARE: any;
-declare const VOCABULARY_PLACES: any;
-declare const VOCABULARY_SPIRITUAL: any;
-declare const VOCABULARY_ADVANCED: any;
-declare const GREETINGS_CONTENT: any;
-declare const NUMBERS_CONTENT: any;
-declare const PRONOUNS_CONTENT: any;
-declare const POSSESSION_CONTENT: any;
-declare const NEGATION_CONTENT: any;
-declare const VERBS_CONTENT: any;
-declare const ADJECTIVES_CONTENT: any;
-declare const COMMANDS_CONTENT: any;
-declare const EXISTENTIAL_CONTENT: any;
-declare const QUESTIONS_CONTENT: any;
+declare const LESSONS: Record<string, Lesson>;
+declare const getDifficulty: () => DifficultyLevel;
+declare const setDifficulty: (difficulty: DifficultyLevel) => void;
+declare const generateLessonQuestions: (lessonId: string, count: number, learnedWords: VocabularyItem[]) => Question[];
+declare const checkLessonAnswer: (userAnswer: string, question: Question) => boolean;
+declare const getCurrentLanguage: () => Language;
+declare const CULTURAL_VOCABULARY: LessonContent;
+declare const VOCABULARY_ANIMALS: LessonContent;
+declare const VOCABULARY_WARFARE: LessonContent;
+declare const VOCABULARY_PLACES: LessonContent;
+declare const VOCABULARY_SPIRITUAL: LessonContent;
+declare const VOCABULARY_ADVANCED: LessonContent;
+declare const GREETINGS_CONTENT: LessonContent;
+declare const NUMBERS_CONTENT: LessonContent;
+declare const PRONOUNS_CONTENT: LessonContent;
+declare const POSSESSION_CONTENT: LessonContent;
+declare const NEGATION_CONTENT: LessonContent;
+declare const VERBS_CONTENT: LessonContent;
+declare const ADJECTIVES_CONTENT: LessonContent;
+declare const COMMANDS_CONTENT: LessonContent;
+declare const EXISTENTIAL_CONTENT: LessonContent;
+declare const QUESTIONS_CONTENT: LessonContent;
 
 // ========================================
 // DEBUG MODE
@@ -1305,7 +1320,7 @@ function selectNode(node) {
         lessonInfo.innerHTML = `
             <div class="lesson-type">
                 <span>${lesson.icon || '📚'}</span>
-                <span>${lesson.englishName}</span>
+                <span>${lesson.name}</span>
             </div>
             <div class="lesson-desc">${lesson.description}</div>
         `;
@@ -1422,7 +1437,7 @@ function showDifficultySelector(container, node, battleType) {
         `;
         btn.title = diff.desc;
         btn.onclick = () => {
-            setDifficulty(diff.id);
+            setDifficulty(diff.id as DifficultyLevel);
             if (battleType === 'train') {
                 startBattle(node, 'train');
             } else {
@@ -1714,12 +1729,11 @@ function showTutorial(node, battleType) {
     
     // Update header
     document.getElementById('tutorial-icon').textContent = lesson?.icon || '📚';
-    document.getElementById('tutorial-title').textContent = `${t('learning')}: ${lesson?.englishName || 'Vocabulary'}`;
+    document.getElementById('tutorial-title').textContent = `${t('learning')}: ${lesson?.name || 'Vocabulary'}`;
     document.getElementById('tutorial-location').textContent = node.name;
     
-    // @ts-ignore - textContent accepts numbers
     // Update progress
-    document.getElementById('tutorial-total').textContent = tutorialState.items.length;
+    document.getElementById('tutorial-total').textContent = String(tutorialState.items.length);
     
     // Render first item
     renderTutorialCard();
@@ -1779,15 +1793,13 @@ function renderTutorialCard() {
             </div>
         </div>
     `;
-    // @ts-ignore - textContent accepts numbers
     
     // Update progress
-    document.getElementById('tutorial-current').textContent = tutorialState.currentIndex + 1;
+    document.getElementById('tutorial-current').textContent = String(tutorialState.currentIndex + 1);
 }
 
 function updateTutorialNavigation() {
     const prevBtn = document.getElementById('tutorial-prev') as HTMLButtonElement;
-    // @ts-ignore - disabled exists on HTMLElement
     const nextBtn = document.getElementById('tutorial-next');
     const startBtn = document.getElementById('start-quiz');
     
@@ -1866,7 +1878,7 @@ function startBattleQuiz(node, type) {
     const lessonId = node.lessonType || 'vocabulary';
     // Pass learned words for recall questions
     const learnedWordsList = Array.from(GameState.wordsLearned).map(w => ({ kiche: w }));
-    GameState.currentQuestions = generateLessonQuestions(lessonId, questionCount, learnedWordsList);
+    GameState.currentQuestions = generateLessonQuestions(lessonId, questionCount, learnedWordsList as VocabularyItem[]);
     GameState.currentQuestionIndex = 0;
     GameState.correctAnswers = 0;
     
@@ -1884,7 +1896,7 @@ function startBattleQuiz(node, type) {
     if (lesson) {
         document.getElementById('lesson-badge').innerHTML = `
             <span class="lesson-icon">${lesson.icon || '📚'}</span>
-            <span class="lesson-name">${lesson.englishName}</span>
+            <span class="lesson-name">${lesson.name}</span>
         `;
     }
     
@@ -2008,22 +2020,18 @@ function showQuestion() {
         choicesContainer.classList.toggle('icon-text-choices', isIconTextQuestion);
         choicesContainer.classList.toggle('phrase-choices', isPhraseQuestion);
         
-            // @ts-ignore - style exists on button elements
         const buttons = choicesContainer.querySelectorAll('.choice-btn');
         buttons.forEach((btn: Element, i) => {
             if (question.choices && question.choices[i]) {
-            // @ts-ignore - style exists on button elements
                 btn.textContent = question.choices[i];
                 (btn as HTMLButtonElement).style.display = '';
-        // @ts-ignore - disabled/onclick exist on button elements
                 // Add special class for phrase buttons
                 btn.classList.toggle('phrase-btn', isPhraseQuestion);
             } else {
                 (btn as HTMLButtonElement).style.display = 'none';
             }
             btn.classList.remove('correct', 'incorrect');
-        // @ts-ignore - value/placeholder exist on input elements
-            btn.disabled = false;
+            (btn as HTMLButtonElement).disabled = false;
             (btn as HTMLButtonElement).onclick = () => selectChoice(btn, question.choices[i]);
         });
     } else {
@@ -2044,7 +2052,6 @@ function showQuestion() {
     } else {
         submitBtn.classList.remove('hidden');
     }
-        // @ts-ignore - disabled exists on button elements
     document.getElementById('next-question').classList.add('hidden');
 }
 
@@ -2073,7 +2080,6 @@ function selectChoice(button, answer) {
     }
     
     showFeedback(isCorrect, question);
-        // @ts-ignore - value exists on input elements
 }
 
 function submitAnswer() {
@@ -2223,7 +2229,7 @@ function endBattle() {
         // Training - always beneficial, but only marks as complete at 60%+
         result.title = t('trainingComplete');
         result.icon = '📚';
-        result.message = `${t('studiedLesson')} ${LESSONS[node.lessonType]?.englishName || 'K\'iche\''}.`;
+        result.message = `${t('studiedLesson')} ${LESSONS[node.lessonType]?.name || 'K\'iche\''}.`;
         if (correctRatio >= 0.6) {
             result.message += ` (${t(difficulty)} ${t('level')} ✓)`;
         }
@@ -2306,7 +2312,6 @@ function endBattle() {
     
     // Update mastery
     GameState.mastery = Math.min(100, Math.floor((GameState.wordsLearned.size / 80) * 100));
-    // @ts-ignore - textContent accepts numbers
     
     // Display results
     const titleEl = document.getElementById('result-title');
