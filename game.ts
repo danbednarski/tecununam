@@ -1,4 +1,3 @@
-// @ts-nocheck - Game logic file with loose typing during incremental TS migration
 // ========================================
 // TECUN UMAN - Campaign Strategy Game
 // Expanded with army movement, branching paths,
@@ -1787,7 +1786,7 @@ function renderTutorialCard() {
 }
 
 function updateTutorialNavigation() {
-    const prevBtn = document.getElementById('tutorial-prev');
+    const prevBtn = document.getElementById('tutorial-prev') as HTMLButtonElement;
     // @ts-ignore - disabled exists on HTMLElement
     const nextBtn = document.getElementById('tutorial-next');
     const startBtn = document.getElementById('start-quiz');
@@ -1911,7 +1910,7 @@ function updateBattleUI() {
     const battle = GameState.currentBattle;
     
     // Update troop displays
-    document.getElementById('kiche-troops').textContent = GameState.army;
+    document.getElementById('kiche-troops').textContent = String(GameState.army);
     document.getElementById('spanish-troops').textContent = battle.enemyStrength;
     
     // Update health bars
@@ -1924,7 +1923,7 @@ function updateBattleUI() {
     document.getElementById('spanish-health-fill').style.width = `${Math.max(0, spanishPercent)}%`;
     
     // Update round counter
-    document.getElementById('round-number').textContent = GameState.currentQuestionIndex + 1;
+    document.getElementById('round-number').textContent = String(GameState.currentQuestionIndex + 1);
     
     // Update progress dots
     const dots = document.querySelectorAll('#progress-dots .dot');
@@ -1973,7 +1972,7 @@ function showQuestion() {
         promptEl.textContent = question.prompt;
     }
     
-    const textInput = document.getElementById('answer-input');
+    const textInput = document.getElementById('answer-input') as HTMLInputElement;
     const choicesContainer = document.getElementById('choices-container');
     const feedback = document.getElementById('feedback');
     
@@ -2011,21 +2010,21 @@ function showQuestion() {
         
             // @ts-ignore - style exists on button elements
         const buttons = choicesContainer.querySelectorAll('.choice-btn');
-        buttons.forEach((btn, i) => {
+        buttons.forEach((btn: Element, i) => {
             if (question.choices && question.choices[i]) {
             // @ts-ignore - style exists on button elements
                 btn.textContent = question.choices[i];
-                btn.style.display = '';
+                (btn as HTMLButtonElement).style.display = '';
         // @ts-ignore - disabled/onclick exist on button elements
                 // Add special class for phrase buttons
                 btn.classList.toggle('phrase-btn', isPhraseQuestion);
             } else {
-                btn.style.display = 'none';
+                (btn as HTMLButtonElement).style.display = 'none';
             }
             btn.classList.remove('correct', 'incorrect');
         // @ts-ignore - value/placeholder exist on input elements
             btn.disabled = false;
-            btn.onclick = () => selectChoice(btn, question.choices[i]);
+            (btn as HTMLButtonElement).onclick = () => selectChoice(btn, question.choices[i]);
         });
     } else {
         textInput.classList.remove('hidden');
@@ -2039,7 +2038,7 @@ function showQuestion() {
     }
     
     // Show submit for typing questions, hide for multiple choice (auto-submit on click)
-    const submitBtn = document.getElementById('submit-answer');
+    const submitBtn = document.getElementById('submit-answer') as HTMLButtonElement;
     if (isMultipleChoice) {
         submitBtn.classList.add('hidden');
     } else {
@@ -2053,8 +2052,8 @@ function selectChoice(button, answer) {
     const question = GameState.currentQuestions[GameState.currentQuestionIndex];
     
     // Disable all buttons
-    document.querySelectorAll('.choice-btn').forEach(btn => {
-        btn.disabled = true;
+    document.querySelectorAll('.choice-btn').forEach((btn: Element) => {
+        (btn as HTMLButtonElement).disabled = true;
         if (btn.textContent === question.correctAnswer) {
             btn.classList.add('correct');
         }
@@ -2084,7 +2083,7 @@ function submitAnswer() {
         return; // Handled by selectChoice
     }
     
-    const userAnswer = document.getElementById('answer-input').value;
+    const userAnswer = (document.getElementById('answer-input') as HTMLInputElement).value;
     if (!userAnswer.trim()) return;
     
     const isCorrect = checkLessonAnswer(userAnswer, question);
@@ -2318,8 +2317,8 @@ function endBattle() {
     document.getElementById('result-message').textContent = result.message;
     document.getElementById('correct-count').textContent = `${GameState.correctAnswers}/${totalQuestions}`;
     document.getElementById('territory-result').textContent = result.territoryChange;
-    document.getElementById('army-change').textContent = result.armyChange >= 0 ? `+${result.armyChange}` : result.armyChange;
-    document.getElementById('words-learned').textContent = GameState.wordsLearned.size;
+    document.getElementById('army-change').textContent = String(result.armyChange >= 0 ? `+${result.armyChange}` : result.armyChange);
+    document.getElementById('words-learned').textContent = String(GameState.wordsLearned.size);
     
     // Auto-save after battle completion
     autoSave();
@@ -2511,9 +2510,9 @@ function showGameOver(victory) {
     // Delete save on game over
     deleteSave();
     
-    document.getElementById('final-turns').textContent = GameState.turn;
-    document.getElementById('final-words').textContent = GameState.wordsLearned.size;
-    document.getElementById('final-battles').textContent = GameState.battlesWon;
+    document.getElementById('final-turns').textContent = String(GameState.turn);
+    document.getElementById('final-words').textContent = String(GameState.wordsLearned.size);
+    document.getElementById('final-battles').textContent = String(GameState.battlesWon);
     
     showScreen('gameover');
 }
@@ -2545,11 +2544,11 @@ function showScreen(screenName) {
 }
 
 function updateStats() {
-    document.getElementById('army-count').textContent = GameState.army;
+    document.getElementById('army-count').textContent = String(GameState.army);
     document.getElementById('morale').textContent = `${GameState.morale}%`;
     document.getElementById('mastery').textContent = `${GameState.mastery}%`;
-    document.getElementById('turn-number').textContent = GameState.turn;
-    document.getElementById('year').textContent = GameState.year;
+    document.getElementById('turn-number').textContent = String(GameState.turn);
+    document.getElementById('year').textContent = String(GameState.year);
 }
 
 // ========================================
